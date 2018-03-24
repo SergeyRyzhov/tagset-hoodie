@@ -9,7 +9,8 @@ import Tags from "./components/Tags.vue";
 
 const routes = [{
         path: "/",
-        component: Generator
+        component: Generator,
+        alias: '/home'
     },
     {
         path: "/themes",
