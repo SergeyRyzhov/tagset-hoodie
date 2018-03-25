@@ -57,23 +57,34 @@ export default {
     connected() {
       logger.info("API status: online");
       this.$set(this, "connectionStatus", true);
-      this.$hoodie.connectionStatus.stopChecking();
+      var status = this.$hoodie.connectionStatus;
+      setTimeout(() => {
+        status
+          .check()
+          .then(this.connected.bind(this))
+          .catch(this.disconnected.bind(this));
+      }, 180000);
     },
     disconnected() {
       logger.info("API status: offline");
       this.$set(this, "connectionStatus", false);
-      this.$hoodie.connectionStatus.startChecking({ interval: 10000 });
+      var status = this.$hoodie.connectionStatus;
+      setTimeout(() => {
+        status
+          .check()
+          .then(this.connected.bind(this))
+          .catch(this.disconnected.bind(this));
+      }, 60000);
     }
   },
-  created() {
+  mounted() {
     var status = this.$hoodie.connectionStatus;
-    status.on("disconnect", this.disconnected.bind(this));
-    status.on("reconnect reset", this.connected.bind(this));
-    status.check();
+    status
+      .check()
+      .then(this.connected.bind(this))
+      .catch(this.disconnected.bind(this));
   },
-  computed: {
-    msg: String
-  }
+  computed: {}
 };
 </script>
 
