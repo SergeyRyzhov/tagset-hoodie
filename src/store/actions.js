@@ -1,7 +1,7 @@
-import hoodie from './hoodie.js'
-
-export default {
-    sync() {
-        return hoodie.store.sync();
-    }
+export default function (hoodie) {
+    return {
+        sync() {
+            return hoodie.store.sync();
+        }
+    };
 }

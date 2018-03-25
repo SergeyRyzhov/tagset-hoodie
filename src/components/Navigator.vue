@@ -42,3 +42,38 @@
   </b-collapse>
 </b-navbar>
 </template>
+
+<script>
+import logger from "../core/logger.js";
+
+export default {
+  name: "Navigator",
+  data() {
+    return {
+      connectionStatus: false
+    };
+  },
+  methods: {
+    connected() {
+      logger.info("API status: online");
+      this.$set(this, "connectionStatus", true);
+      this.$hoodie.connectionStatus.stopChecking();
+    },
+    disconnected() {
+      logger.info("API status: offline");
+      this.$set(this, "connectionStatus", false);
+      this.$hoodie.connectionStatus.startChecking({ interval: 10000 });
+    }
+  },
+  created() {
+    var status = this.$hoodie.connectionStatus;
+    status.on("disconnect", this.disconnected.bind(this));
+    status.on("reconnect reset", this.connected.bind(this));
+    status.check();
+  },
+  computed: {
+    msg: String
+  }
+};
+</script>
+
