@@ -1,3 +1,5 @@
+/*global require, module, __dirname */
+
 var OfflinePlugin = require('offline-plugin');
 
 module.exports = {
