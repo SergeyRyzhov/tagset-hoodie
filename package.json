@@ -5,10 +5,13 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "hoodie"
   },
   "dependencies": {
     "bootstrap-vue": "^2.0.0-rc.2",
+    "hoodie": "^28.2.6",
+    "pouchdb": "^6.4.3",
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

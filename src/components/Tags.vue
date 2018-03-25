@@ -1,9 +1,11 @@
 <template>
   <div class="tags">
     <h1>tags</h1>
-    <ul v-for="tag in tags" v-bind:key="tag">
-      <li>{{tag}}</li>
+    <ul v-for="tag in tags" v-bind:key="tag._id">
+      <li>{{tag.title}}</li>
       </ul>
+      <input v-model="title" />
+      <button @click="add">add tag</button>
   </div>
 </template>
 
@@ -15,12 +17,22 @@ export default {
   props: {
     msg: String
   },
+  data() {
+    return {
+      title: ""
+    };
+  },
   computed: mapGetters({
-    tags: "allTags"
+    tags: "tags/all"
   }),
-  methods: mapActions([]),
+  methods: {
+    ...mapActions([]),
+    add() {
+      this.$store.dispatch("tags/add", { title: this.title }).then(()=>this.$store.sync())
+    }
+  },
   created() {
-    this.$store.dispatch("getAllTags");
+    this.$store.dispatch("tags/init");
   }
 };
 </script>
