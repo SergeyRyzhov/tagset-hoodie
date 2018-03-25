@@ -1,9 +1,14 @@
+var OfflinePlugin = require('offline-plugin');
+
 module.exports = {
     configureWebpack: {
         output: {
             path: __dirname + '/dist',
             publicPath: '/tagset/'
         },
-        devtool: 'none'
+        devtool: 'none',
+        plugins: [
+            new OfflinePlugin()
+        ]
     }
 }
