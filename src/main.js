@@ -9,6 +9,7 @@ import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'octicons/build/build.css'
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
@@ -18,6 +19,7 @@ Vue.use(VueHoodie);
 import App from './App.vue'
 import StoreFactory from './store'
 import AccountService from './store/account.js'
+// import logger from "./core/logger.js";
 
 const url = "http://localhost:8081"
 var hoodie = new Hoodie({
@@ -25,7 +27,17 @@ var hoodie = new Hoodie({
   url
 });
 
+hoodie.connectionStatus.startChecking({
+  interval: {
+    connected: 60000,
+    disconnected: 10000
+  }
+});
+
 Vue.config.productionTip = false
+Vue.config.errorHandler = () => {
+  hoodie.connectionStatus.check();
+}
 
 new Vue({
   store: StoreFactory(hoodie),
