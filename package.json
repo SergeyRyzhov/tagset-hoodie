@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "hoodie"
+    "start": "node \"./node_modules/hoodie/bin/start.js\""
   },
   "dependencies": {
     "bootstrap-vue": "^2.0.0-rc.2",

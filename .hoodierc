@@ -1,0 +1,13 @@
+{
+    "env_address": "127.0.0.1",
+    "env_port": 8081,
+    "env_dbUrl": "http://localhost:5984/",
+    "env_url": "",
+    "env_adminPassword": "",
+    "data": ".hoodie",
+    "public": "public",
+    "dbAdapter": "pouchdb-adapter-http",
+    "inMemory": false,
+    "loglevel": "warn",
+    "name": "tagset-server"
+}
