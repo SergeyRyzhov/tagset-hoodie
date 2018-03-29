@@ -2,6 +2,7 @@ import Vuex from "vuex";
 
 // import tagModule from './modules/tags'
 import topicsModule from "./modules/topics.js";
+import linksModule from "./modules/links.js";
 
 const rootState = {
   tags: {
@@ -10,26 +11,6 @@ const rootState = {
       { title: "waterfall", _id: "i2", rate: 30 },
       { title: "car", _id: "i3", rate: 20 }
     ]
-  },
-  links: {
-    all: [
-      {
-        topic: "i1",
-        tag: "i1"
-      },
-      {
-        topic: "i1",
-        tag: "i2"
-      },
-      {
-        topic: "i2",
-        tag: "i2"
-      },
-      {
-        topic: "i2",
-        tag: "i3"
-      }
-    ]
   }
 };
 
@@ -37,7 +18,8 @@ export default function(hoodie) {
   return new Vuex.Store({
     modules: {
       // tag: tagModule(hoodie),
-      topics: topicsModule(hoodie)
+      topics: topicsModule(hoodie),
+      links: linksModule(hoodie),
     },
     state: rootState,
     actions: {

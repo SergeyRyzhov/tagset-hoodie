@@ -8,7 +8,7 @@
     <div>
       Remove tag from topic:
       <div v-for="tag in tags(topic)" :key="'tag' + tag._id" style="display: inline;">
-          <b-button variant="danger" size="sm" @click="removeLink(topic, tag)">{{tag.title}}</b-button>
+          <b-button variant="danger" size="sm" @click="removeLink({topic, tag})">{{tag.title}}</b-button>
       </div>
     </div>
   </div>
@@ -34,7 +34,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions({}),
+    ...mapActions({
+      remove: "topics/remove",
+      removeLink: "links/remove"
+    }),
     ...mapMutations({})
   }
 };

@@ -17,20 +17,20 @@ export default function(hoodie) {
             return tags;
           }, []);
       },
-      findWhere: (state /*, getters, rootState*/) => props => {
+      findWhere: (state) => props => {
         return state.all.find(entity => entity._id === props._id);
       }
     },
     actions: {
-      // dispatch('module/x')
-      // action({ state, commit, rootState }, props) {
-      //   commit("action", props);
-      // }
+      remove({ commit }, props) {
+        commit("remove", props);
+      }
     },
     mutations: {
-      // commit('module/x')
-      // select(state, { _id }) {
-      // }
+      remove(state, { _id }) {
+        var index = state.all.findIndex(entity => entity._id === _id);
+        if (index >= 0) state.all.splice(index, 1);
+      }
     }
   };
 }
