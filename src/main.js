@@ -35,9 +35,10 @@ hoodie.connectionStatus.startChecking({
 });
 
 Vue.config.productionTip = false
-Vue.config.errorHandler = () => {
-  hoodie.connectionStatus.check();
-}
+// Vue.config.errorHandler = () => {
+//   console.error(arguments);
+//   // hoodie.connectionStatus.check();
+// }
 
 new Vue({
   store: StoreFactory(hoodie),

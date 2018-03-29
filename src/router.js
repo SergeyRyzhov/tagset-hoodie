@@ -10,7 +10,12 @@ import {
   EditTopic,
   ViewTopic
 } from "./components/topics/index.js";
-import Tags from "./components/tags/Index.vue";
+import {
+  TagList,
+  CreateTag,
+  EditTag,
+  ViewTag
+} from "./components/tags/index.js";
 
 const routes = [
   {
@@ -41,7 +46,24 @@ const routes = [
   },
   {
     path: "/tags",
-    component: Tags
+    component: TagList,
+    children: [
+      {
+        name: "tag-view",
+        path: "/tag/:id/details",
+        component: ViewTag
+      },
+      {
+        name: "tag-edit",
+        path: "/tag/:id/edit",
+        component: EditTag
+      },
+      {
+        name: "tag-create",
+        path: "/tag/create",
+        component: CreateTag
+      }
+    ]
   }
 ];
 
