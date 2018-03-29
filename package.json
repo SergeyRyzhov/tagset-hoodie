@@ -9,8 +9,12 @@
     "start": "node \"./node_modules/hoodie/bin/start.js\""
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bootstrap-vue": "^2.0.0-rc.2",
+    "clipboard-polyfill": "^2.4.6",
     "hoodie": "^28.2.6",
+    "jquery": "^1.9.1",
+    "lodash": "^4.17.5",
     "octicons": "^7.2.0",
     "pouchdb": "^6.4.3",
     "vue": "^2.5.13",

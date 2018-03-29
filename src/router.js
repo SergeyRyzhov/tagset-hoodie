@@ -1,26 +1,28 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-import Generator from "./components/Generator.vue";
-import Themes from "./components/Themes.vue";
-import Tags from "./components/Tags.vue";
+import Generator from "./components/generator/Index.vue";
+import Topics from "./components/topics/Index.vue";
+import Tags from "./components/tags/Index.vue";
 
-const routes = [{
-        path: "/",
-        component: Generator,
-        alias: '/home'
-    },
-    {
-        path: "/themes",
-        component: Themes
-    },
-    {
-        path: "/tags",
-        component: Tags
-    }
+const routes = [
+  {
+    path: "/",
+    alias: "/home",
+    component: Generator
+  },
+  {
+    path: "/topics",
+    component: Topics
+  },
+  {
+    path: "/tags",
+    component: Tags
+  }
 ];
+
 export default new VueRouter({
-    routes
+  routes
 });

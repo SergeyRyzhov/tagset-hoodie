@@ -21,14 +21,27 @@ export default function (hoodie) {
                     logger.error('fail to load tags', reason);
                 });
         },
-        add({
+        updateOrAdd({
             commit
         }, tagModel) {
             tagModel.type = type;
             logger.debug('tag to store', tagModel);
-            return hoodie.store.add(tagModel)
+            return hoodie.store.updateOrAdd(tagModel)
                 .then(tag => {
-                    commit('add', tag);
+                    commit('updateOrAdd', tag);
+                })
+                .catch(reason => {
+                    logger.error('fail to store tag', reason);
+                });
+        },
+        remove({
+            commit
+        }, tagModel) {
+            tagModel.type = type;
+            logger.debug('tag to remove', tagModel);
+            return hoodie.store.remove(tagModel)
+                .then(() => {
+                    commit('remove', tagModel);
                 })
                 .catch(reason => {
                     logger.error('fail to store tag', reason);
@@ -40,8 +53,17 @@ export default function (hoodie) {
         setAllTags(state, tags) {
             state.all = tags
         },
-        add(state, tag) {
-            state.all.push(tag);
+        updateOrAdd(state, tag) {
+            var index = state.all.findIndex(i => i._id == tag._id);
+            if (index >= 0)
+                state.all[0] = tag;
+            else
+                state.all.push(tag);
+        },
+        remove(state, tag) {
+            var index = state.all.indexOf(tag);
+            if (index >= 0)
+               state.all.slice(index, 1);
         }
     }
 

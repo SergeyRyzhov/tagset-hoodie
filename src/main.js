@@ -18,7 +18,7 @@ Vue.use(VueHoodie);
 
 import App from './App.vue'
 import StoreFactory from './store'
-import AccountService from './store/account.js'
+import AccountService from './core/account.js'
 // import logger from "./core/logger.js";
 
 const url = "http://localhost:8081"

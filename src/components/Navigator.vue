@@ -9,9 +9,9 @@
   </b-navbar-brand>
   <b-collapse is-nav id="nav_collapse">
     <b-navbar-nav>
-        <b-nav-item :to="{ path: 'home' }">Home</b-nav-item>
-        <b-nav-item :to="{ path: 'themes' }">Themes</b-nav-item>
-        <b-nav-item :to="{ path: 'tags' }">Tags</b-nav-item>
+        <b-nav-item :to="{ path: '/home' }">Home</b-nav-item>
+        <b-nav-item :to="{ path: '/topics' }">Topics</b-nav-item>
+        <b-nav-item :to="{ path: '/tags' }">Tags</b-nav-item>
     </b-navbar-nav>
     <!-- <b-navbar-nav class="ml-auto">       
       <b-nav-form>
