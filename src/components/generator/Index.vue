@@ -5,6 +5,8 @@
     <div v-for="topic in topics" :key="'topic' + topic._id" style="display: inline;">
       <b-button :variant="!selectedTopics.hasOwnProperty(topic._id)?'primary':'warning'" @click="toggleTopic(topic)">{{topic.title}}</b-button>
     </div>
+    
+    <!-- advanced -->
     <h1>Configure</h1>
     <div v-for="topic in selectedTopics" :key="'s-topic-tags' + topic._id">
       <b-button variant="danger" size="sm" @click="toggleTopic(topic)">{{ topic.title }}</b-button>
@@ -12,6 +14,7 @@
           <b-button variant="outline-success" size="sm" :pressed.sync="include" @click="toggleTag(topic, tag)">{{tag.title}}</b-button>
       </div>
     </div>
+    
     <!-- result and copy to-->
     <h1>Results</h1>
     <div> 

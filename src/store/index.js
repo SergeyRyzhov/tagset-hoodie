@@ -1,12 +1,9 @@
 import Vuex from "vuex";
 
 // import tagModule from './modules/tags'
-// import topicsModule from './modules/topics'
+import topicsModule from "./modules/topics.js";
 
-const state = {
-  topics: {
-    all: [{ title: "nature", _id: "i1" }, { title: "tech", _id: "i2" }]
-  },
+const rootState = {
   tags: {
     all: [
       { title: "nature", _id: "i1", rate: 10 },
@@ -40,9 +37,9 @@ export default function(hoodie) {
   return new Vuex.Store({
     modules: {
       // tag: tagModule(hoodie),
-      // topic: topicsModule(hoodie)
+      topics: topicsModule(hoodie)
     },
-    state,
+    state: rootState,
     actions: {
       sync() {
         return hoodie.store.sync();

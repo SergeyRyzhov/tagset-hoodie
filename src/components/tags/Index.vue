@@ -1,25 +1,6 @@
 <template>
 <div>
-    <div v-if="view">
-      view
-        <!-- <label>{{ tag.title }}</label>
-        <b-button size="sm" @click="edit">            
-            <i style="color:#dc354587;" v-html="octicons.pencil.toSVG()"></i> edit
-        </b-button>
-        <b-button size="sm" @click="remove">            
-            <i style="color:#dc354587;" v-html="octicons.trashcan.toSVG()"></i> remove
-        </b-button> -->
-    </div>
-    <div v-else>
-      edit
-        <!-- <b-form @submit="save" inline>
-            <label for="title">Title</label>
-            <b-input v-model="tag.title" id="title"/>
-            <b-button size="sm" type="submit" variant="primary">         
-                <i style="color:#dc354587;" v-html="octicons.database.toSVG()"></i> save
-            </b-button>
-        </b-form> -->
-    </div>    
+   <!---->
 </div>
 </template>
 
