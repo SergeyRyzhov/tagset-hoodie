@@ -1,4 +1,5 @@
-import logger from "../../core/logger.js";
+import Logger from "../../core/logger.js";
+const logger = Logger.getLogger('topics.store');
 
 export default function(hoodie) {
   if (!hoodie) {
@@ -35,7 +36,7 @@ export default function(hoodie) {
     },
     mutations: {
       remove(state, ...toRemove) {
-        logger.debug("topics to remove", toRemove);
+        logger.debug("%o to remove", toRemove);
         toRemove.forEach(entity =>
           state.all.splice(state.all.indexOf(entity), 1)
         );

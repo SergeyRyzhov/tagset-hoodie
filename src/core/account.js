@@ -1,4 +1,5 @@
-import logger from '../core/logger.js'
+import Logger from '../core/logger.js'
+const logger = Logger.getLogger("account.service");
 
 function AccountService(hoodie) {
     const sharedUser = {

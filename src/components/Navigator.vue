@@ -42,8 +42,9 @@
 </template>
 
 <script>
-  import logger from "../core/logger.js";
+  import Logger from "../core/logger.js";
   import octicons from "octicons";
+  const logger = Logger.getLogger("navigator.component");
 
   export default {
     name: "Navigator",

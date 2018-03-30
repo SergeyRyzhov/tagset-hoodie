@@ -1,4 +1,5 @@
-import logger from "../../core/logger.js";
+import Logger from "../../core/logger.js";
+const logger = Logger.getLogger('tags.store');
 
 export default function(hoodie) {
   if (!hoodie) {
@@ -46,16 +47,19 @@ export default function(hoodie) {
       }
     },
     mutations: {
-      remove(state, ...toRemove) {
-        logger.debug("tags to remove", toRemove);
-        toRemove.forEach(entity =>
+      remove(state, ...entities) {
+        logger.debug("%o to remove", entities);
+        entities.forEach(entity =>
           state.all.splice(state.all.indexOf(entity), 1)
         );
       },
-      addOrUpdate(state, newEntity) {
-        var index = state.all.findIndex(entity => entity._id === newEntity._id);
-        if (index >= 0) state.all[index] = newEntity;
-        else state.all.push(newEntity);
+      addOrUpdate(state, ...entities) {
+        logger.debug("%o to add or update", entities);
+        entities.forEach(entity => {
+          var index = state.all.indexOf(entity);
+          if (index >= 0) state.all[index] = entity;
+          else state.all.push(entity);
+        });
       }
     }
   };

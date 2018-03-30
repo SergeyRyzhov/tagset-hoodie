@@ -14,6 +14,9 @@
 </template>
 
 <script>
+  import Logger from "../../core/logger.js";
+  const logger = Logger.getLogger("tags.create.component");
+
   import {
     mapState,
     mapGetters,
@@ -44,7 +47,7 @@
       }),
       ...mapMutations({}),
       save(form) {
-        console.log(form);
+        logger.debug(form);
         this.saveToDb(form);
         this.$set(this, "form", defaultForm());
       }

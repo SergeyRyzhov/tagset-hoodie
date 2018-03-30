@@ -19,7 +19,8 @@ Vue.use(VueHoodie);
 import App from './App.vue'
 import StoreFactory from './store'
 import AccountService from './core/account.js'
-// import logger from "./core/logger.js";
+import Logger from "./core/logger.js";
+const logger = Logger.getLogger('root');
 
 const url = "http://localhost:8081"
 var hoodie = new Hoodie({
@@ -36,7 +37,7 @@ hoodie.connectionStatus.startChecking({
 
 Vue.config.productionTip = false
 // Vue.config.errorHandler = () => {
-//   console.error(arguments);
+//   logger.error(arguments);
 //   // hoodie.connectionStatus.check();
 // }
 
@@ -51,3 +52,5 @@ new Vue({
 }).$mount('#app')
 
 OfflinePluginRuntime.install();
+
+logger.info('Application started');
