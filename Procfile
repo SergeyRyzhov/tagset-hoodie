@@ -1,3 +1,3 @@
-#web: npm run serve
 api: npm start
-#test: npm run lint
+#web: npm run serve
+#test: npm run test:watch
