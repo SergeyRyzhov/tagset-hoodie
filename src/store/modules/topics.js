@@ -1,10 +1,12 @@
 import Logger from "../../core/logger.js";
+import { _Array } from "../../core/sugar";
 const logger = Logger.getLogger("topics.store");
 
 export default function(hoodie) {
   if (!hoodie) {
     throw new Error("Please provide Hoodie");
   }
+  logger.trace("initialized");
 
   return {
     namespaced: true,
@@ -37,13 +39,11 @@ export default function(hoodie) {
       }
     },
     mutations: {
-      remove(state, toRemove) {
-        toRemove = Array.isArray(toRemove) ? toRemove : [toRemove];
-        logger.debug("remove %o from %o", toRemove, state.all);
-        toRemove.forEach(entity => {
-          let index = state.all.indexOf(entity);
-          if (index >= 0) state.all.splice(index, 1);
-        });
+      remove(state, entities) {
+        _Array.remove(state.all, entities);
+      },
+      addOrUpdate(state, entities) {
+        _Array.addOrUpdate(state.all, entities);
       }
     }
   };

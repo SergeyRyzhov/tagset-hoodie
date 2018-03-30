@@ -9,13 +9,8 @@ import {
   CreateTopic,
   EditTopic,
   ViewTopic
-} from "./components/topics/index.js";
-import {
-  TagList,
-  CreateTag,
-  EditTag,
-  ViewTag
-} from "./components/tags/index.js";
+} from "./components/topics";
+import { TagList, CreateTag, EditTag, ViewTag } from "./components/tags";
 
 const routes = [
   {
