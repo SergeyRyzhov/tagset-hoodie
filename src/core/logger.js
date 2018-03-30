@@ -1,25 +1,27 @@
 /*eslint no-console: ["off"] */
+import Config from '../config.js'
 
-export default {
-  levels,
-  getLogger
-};
+export default new LoggerFactory();
 
-const levels = {
-  error: 0,
-  warn: 1,
-  all: 2
-};
+function LoggerFactory(){
+  this.levels = {
+    error: 0,
+    warn: 1,
+    all: 2
+  };
+
+  this.getLogger = getLogger;
+}
 
 function getLogger(name, level) {
-  level = level || levels.all;
+  level = level || Config.level;
   let mapping = {
-    log: level >= levels.all,
-    info: level >= levels.all,
-    debug: level >= levels.all,
-    trace: level >= levels.all,
-    warn: level >= levels.warn,
-    error: level >= levels.error
+    log: level >= this.levels.all,
+    info: level >= this.levels.all,
+    debug: level >= this.levels.all,
+    trace: level >= this.levels.all,
+    warn: level >= this.levels.warn,
+    error: level >= this.levels.error
   };
   var logger = {};
   for (const method in mapping) {

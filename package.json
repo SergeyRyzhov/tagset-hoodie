@@ -5,8 +5,13 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "start": "node \"./node_modules/hoodie/bin/start.js\""
+    "test": "npm run test:lint && npm run test:karma",
+    "test:watch": "npm run test:lint && npm run test:karma:watch",
+    "test:lint": "vue-cli-service lint",
+    "test:karma": "karma start test/karma.config.js --singleRun",
+    "test:karma:watch": "karma start test/karma.config.js",
+    "start": "hoodie",
+    "start2": "node \"./node_modules/hoodie/bin/start.js\""
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -26,6 +31,13 @@
     "@vue/cli-plugin-babel": "^3.0.0-beta.6",
     "@vue/cli-plugin-eslint": "^3.0.0-beta.6",
     "@vue/cli-service": "^3.0.0-beta.6",
+    "jasmine": "^3.1.0",
+    "karma": "^2.0.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.1",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-webpack": "^3.0.0",
     "offline-plugin": "^4.9.0",
     "vue-template-compiler": "^2.5.13"
   },
