@@ -1,3 +1,5 @@
+import logger from "../../core/logger.js";
+
 export default function(hoodie) {
   if (!hoodie) {
     throw new Error("Please provide Hoodie");
@@ -31,18 +33,31 @@ export default function(hoodie) {
       }
     },
     actions: {
-      remove({ commit }, props) {
-        props.topic = props.topic ? props.topic._id : props.topic;
-        props.tag = props.tag._id || props.tag;
-        commit("remove", props);
+      remove({ commit, state }, props) {
+        var promise = new Promise(resolve => {
+          const { topic, tag } = {
+            topic: props.topic ? props.topic._id || props.topic : null,
+            tag: props.tag ? props.tag._id || props.tag : null
+          };
+          var toRemove = state.all.filter(
+            entity =>
+              (entity.topic === topic && !tag) ||
+              (entity.tag === tag && !topic) ||
+              (entity.topic === topic && entity.tag === tag)
+          );
+          commit("remove", toRemove);
+
+          resolve(toRemove);
+        });
+        return promise;
       }
     },
     mutations: {
-      remove(state, { topic, tag }) {
-        var index = state.all.findIndex(
-          entity => entity.topic === topic && entity.tag === tag
+      remove(state, ...toRemove) {
+        logger.debug("links to remove", toRemove);
+        toRemove.forEach(entity =>
+          state.all.splice(state.all.indexOf(entity), 1)
         );
-        if (index >= 0) state.all.splice(index, 1);
       }
     }
   };

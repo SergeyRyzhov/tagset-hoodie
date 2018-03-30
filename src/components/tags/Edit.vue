@@ -27,7 +27,6 @@
       return {};
     },
     mounted() {},
-    watch: {},
     computed: {
       ...mapState({}),
       ...mapGetters({
