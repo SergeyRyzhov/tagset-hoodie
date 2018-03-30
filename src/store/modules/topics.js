@@ -1,6 +1,8 @@
 import Logger from "../../core/logger.js";
 import { _Array } from "../../core/sugar";
+
 const logger = Logger.getLogger("topics.store");
+const type = "topic";
 
 export default function(hoodie) {
   if (!hoodie) {
@@ -29,21 +31,50 @@ export default function(hoodie) {
       }
     },
     actions: {
-      remove({ commit, dispatch }, props) {
-        dispatch("links/remove", { topic: props._id }, { root: true }).then(
-          links => {
-            logger.debug("links were removed", links);
-            commit("remove", props);
-          }
-        );
+      remove({ commit, dispatch }, entities) {
+        entities = Array.isArray(entities) ? entities : [entities];
+        entities = JSON.parse(JSON.stringify(entities));
+        return Promise.all(
+          entities.map(entity => {
+            return dispatch(
+              "links/remove",
+              { topic: entity._id },
+              { root: true }
+            );
+          })
+        ).then(links => {
+          links = _Array.flatten(links);
+          logger.debug("links were removed", links);
+          commit("remove", entities);
+        });
+      },
+      addOrUpdate({ commit, state }, entities) {
+        entities = Array.isArray(entities) ? entities : [entities];
+        entities = JSON.parse(JSON.stringify(entities));
+        var promise = new Promise(resolve => {
+          entities.forEach(element => {
+            var current = state.all.find(
+              entity =>
+                entity.title == element.title || entity._id == element._id
+            );
+            element.type = type;
+            element._id = current
+              ? current._id
+              : "id" + Math.random() * 1000000;
+          });
+
+          commit("addOrUpdate", entities);
+          resolve(entities);
+        });
+        return promise;
       }
     },
     mutations: {
       remove(state, entities) {
-        _Array.remove(state.all, entities);
+        _Array.remove(state.all, entities, '_id');
       },
       addOrUpdate(state, entities) {
-        _Array.addOrUpdate(state.all, entities);
+        _Array.addOrUpdate(state.all, entities, "_id");
       }
     }
   };
