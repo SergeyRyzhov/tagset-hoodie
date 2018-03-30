@@ -1,5 +1,5 @@
 import Logger from "../../core/logger.js";
-const logger = Logger.getLogger('topics.store');
+const logger = Logger.getLogger("topics.store");
 
 export default function(hoodie) {
   if (!hoodie) {
@@ -13,12 +13,14 @@ export default function(hoodie) {
     },
     getters: {
       tags: (state, getters, rootState) => topic => {
-        return rootState.links.all
+        const result = rootState.links.all
           .filter(link => link.topic == topic._id)
           .reduce((tags, link) => {
             tags.push(rootState.tags.all.find(tag => tag._id == link.tag));
             return tags;
           }, []);
+        logger.debug("tags of topic %o tag %o", result, topic);
+        return result;
       },
       findWhere: state => props => {
         return state.all.find(entity => entity._id === props._id);
@@ -35,11 +37,13 @@ export default function(hoodie) {
       }
     },
     mutations: {
-      remove(state, ...toRemove) {
-        logger.debug("%o to remove", toRemove);
-        toRemove.forEach(entity =>
-          state.all.splice(state.all.indexOf(entity), 1)
-        );
+      remove(state, toRemove) {
+        toRemove = Array.isArray(toRemove) ? toRemove : [toRemove];
+        logger.debug("remove %o from %o", toRemove, state.all);
+        toRemove.forEach(entity => {
+          let index = state.all.indexOf(entity);
+          if (index >= 0) state.all.splice(index, 1);
+        });
       }
     }
   };
