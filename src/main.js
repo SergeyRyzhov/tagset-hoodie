@@ -20,7 +20,7 @@ import App from './App.vue'
 import StoreFactory from './store'
 import AccountService from './core/account.js'
 import Logger from "./core/logger.js";
-const logger = Logger.getLogger('root');
+const logger = Logger.getLogger('app');
 
 const url = "http://localhost:8081"
 var hoodie = new Hoodie({
