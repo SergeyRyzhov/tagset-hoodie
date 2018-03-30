@@ -17,7 +17,7 @@ export default function(hoodie) {
             return tags;
           }, []);
       },
-      findWhere: (state) => props => {
+      findWhere: state => props => {
         return state.all.find(entity => entity._id === props._id);
       }
     },

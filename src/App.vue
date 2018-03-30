@@ -6,20 +6,22 @@
 </template>
 
 <script>
-import Navigator from "./components/Navigator.vue";
-import router from "./router";
+  import Navigator from "./components/Navigator.vue";
+  import router from "./router";
 
-export default {
-  name: "app",
-  components: { Navigator },
-  router
-};
+  export default {
+    name: "app",
+    components: {
+      Navigator
+    },
+    router
+  };
 </script>
 
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  #app {
+    font-family: "Avenir", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 </style>

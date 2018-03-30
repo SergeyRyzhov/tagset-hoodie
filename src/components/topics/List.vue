@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--topics-->
-    <h1>Topics</h1> 
+    <h1>Topics</h1>
     <ul style="list-style-type: none;">
       <li v-for="topic in topics" :key="'topic' + topic._id">
         {{ topic.title }}
@@ -10,30 +10,30 @@
       </li>
     </ul>
     <b-link :to="{ name: 'topic-create', params: { }}">Add new</b-link>
-    
-    <router-view></router-view>   
+
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+  import {
+    mapState
+  } from "vuex";
 
-export default {
-  data() {
-    return {};
-  },
-  computed: {
-    ...mapState({
-      topics: state => state.topics.all,
-      tags: state => state.tags.all,
-      links: state => state.links.all
-    })
-  },
-  methods: {
-  }
-};
+  export default {
+    data() {
+      return {};
+    },
+    computed: {
+      ...mapState({
+        topics: state => state.topics.all,
+        tags: state => state.tags.all,
+        links: state => state.links.all
+      })
+    },
+    methods: {}
+  };
 </script>
 
 <style scoped>
-
 </style>
