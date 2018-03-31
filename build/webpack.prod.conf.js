@@ -41,7 +41,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       compress: {
         warnings: false
       },
-      sourceMap: true
+      sourceMap: config.build.productionSourceMap
     }),
     // extract css into its own file
     new ExtractTextPlugin({
@@ -138,5 +138,6 @@ if (config.build.bundleAnalyzerReport) {
 }
 
 webpackConfig.plugins.push(new OfflinePlugin())
+
 
 module.exports = webpackConfig

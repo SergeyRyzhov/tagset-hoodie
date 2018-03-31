@@ -7,9 +7,9 @@
 
 <script>
   import Navigator from './components/Navigator.vue'
-import router from './router'
+  import router from './router'
 
-export default {
+  export default {
     name: 'app',
     components: {
       Navigator
