@@ -3,7 +3,7 @@
   "short_name": "tagset",
   "icons": [
     {
-      "src": "/static/img/icons/logo48.png",
+      "src": "/static/img/icons/logo-48x48.png",
       "sizes": "48x48",
       "type": "image/png"
     }
