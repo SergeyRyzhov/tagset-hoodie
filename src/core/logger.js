@@ -96,7 +96,7 @@ function _buildAppender (config) {
       }
 
       if (config.evaluate && config.buffer.length > 0) {
-        buffer = config.buffer.pop()
+        let buffer = config.buffer.pop()
         if (buffer.length <= 1) return
 
         buffer.push(currentCache)

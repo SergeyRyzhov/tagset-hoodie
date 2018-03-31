@@ -15,9 +15,9 @@
 
 <script>
 import Logger from '../../core/logger.js'
-const logger = Logger.getLogger('topic.create.component')
-
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
+
+const logger = Logger.getLogger('topic.create.component')
 
 function defaultForm () {
   return {
@@ -51,7 +51,7 @@ export default {
 
       var formTags = (form.tags || '')
         .split(' ')
-        .filter(t => t.indexOf('#') == 0)
+        .filter(t => t.indexOf('#') === 0)
         .map(x => {
           return {
             title: x.substring(1)

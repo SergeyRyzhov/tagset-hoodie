@@ -23,7 +23,7 @@
 export default {
     data () {
       return {}
-  },
+    },
     computed: {
       ...mapState({
         topics: state => state.topics.all,

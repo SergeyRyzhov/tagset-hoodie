@@ -80,8 +80,8 @@ export default function (hoodie) {
           entities.forEach(element => {
             var current = state.all.find(
               entity =>
-                (entity.topic == element.topic && entity.tag == element.tag) ||
-                entity._id == element._id
+                (entity.topic === element.topic && entity.tag === element.tag) ||
+                entity._id === element._id
             )
             element.type = type
             element._id = current

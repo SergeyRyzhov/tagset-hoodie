@@ -41,7 +41,7 @@ export default {
 
         combinedTags: ''
       }
-  },
+    },
     computed: {
       ...mapState({
         topics: state => state.topics.all,
@@ -103,9 +103,9 @@ export default {
         clipboard.writeText(this.combinedTags)
       },
       _tagsOfTopic (topic) {
-        return this.links.filter(link => link.topic == topic._id).reduce(
+        return this.links.filter(link => link.topic === topic._id).reduce(
           (tags, link) => {
-            tags.push(this.tags.find(tag => tag._id == link.tag))
+            tags.push(this.tags.find(tag => tag._id === link.tag))
             return tags
           }, []
         )

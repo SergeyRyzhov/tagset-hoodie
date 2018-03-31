@@ -15,7 +15,7 @@
         <b-nav-item :to="{ path: '/history' }">History</b-nav-item>
         <b-nav-item :to="{ path: '/statistic' }">Statistic</b-nav-item>
       </b-navbar-nav>
-      <!-- <b-navbar-nav class="ml-auto">       
+      <!-- <b-navbar-nav class="ml-auto">
         <b-nav-form>
           <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search"/>
           <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
@@ -53,7 +53,7 @@ export default {
         connectionStatus: true,
         octicons
       }
-  },
+    },
     methods: {
       checkStatus () {
         var status = this.$hoodie.connectionStatus
@@ -74,7 +74,7 @@ export default {
       status.on('reset', this.connected.bind(this))
       status.on('disconnect', this.disconnected.bind(this))
       this.checkStatus()
-  },
+    },
     computed: {}
   }
 </script>

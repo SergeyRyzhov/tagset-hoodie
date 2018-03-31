@@ -11,15 +11,16 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'octicons/build/build.css'
 
+import App from './App.vue'
+import StoreFactory from './store'
+import AccountService from './core/account.js'
+import Logger from './core/logger.js'
+
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
 Vue.use(VueHoodie)
 
-import App from './App.vue'
-import StoreFactory from './store'
-import AccountService from './core/account.js'
-import Logger from './core/logger.js'
 const logger = Logger.getLogger('app')
 
 const url = 'http://localhost:8081'
@@ -38,7 +39,7 @@ hoodie.connectionStatus.startChecking({
 Vue.config.productionTip = false
 // Vue.config.errorHandler = () => {
 //   logger.error(arguments);
-//   // hoodie.connectionStatus.check();
+// hoodie.connectionStatus.check();
 // }
 
 new Vue({

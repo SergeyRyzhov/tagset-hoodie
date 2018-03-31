@@ -15,35 +15,34 @@
 
 <script>
   import Logger from '../../core/logger.js'
-const logger = Logger.getLogger('tags.create.component')
-
-import {
+  import {
     mapState,
     mapGetters,
     mapActions,
     mapMutations
   } from 'vuex'
 
-function defaultForm () {
+  const logger = Logger.getLogger('tags.create.component')
+
+  function defaultForm () {
     return {
       title: '',
       rate: 10
     }
-}
+  }
   export default {
     data () {
       return {
         form: defaultForm()
       }
-  },
+    },
     computed: {
       ...mapState({}),
       ...mapGetters({})
     },
     methods: {
       ...mapActions({
-        saveToDb: 'tags/addOrUpdate' //,
-        // removeLink: "links/remove"
+        saveToDb: 'tags/addOrUpdate'
       }),
       ...mapMutations({}),
       save (form) {

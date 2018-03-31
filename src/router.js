@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-Vue.use(VueRouter)
-
 import Generator from './components/generator/Index.vue'
 import {
   TopicList,
@@ -11,6 +9,8 @@ import {
   ViewTopic
 } from './components/topics'
 import { TagList, CreateTag, EditTag, ViewTag } from './components/tags'
+
+Vue.use(VueRouter)
 
 const routes = [
   {

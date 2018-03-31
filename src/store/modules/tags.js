@@ -22,10 +22,10 @@ export default function (hoodie) {
     getters: {
       topics: (state, getters, rootState) => tag => {
         const result = rootState.links.all
-          .filter(link => link.tag == tag._id)
+          .filter(link => link.tag === tag._id)
           .reduce((topics, link) => {
             topics.push(
-              rootState.topics.all.find(topic => topic._id == link.topic)
+              rootState.topics.all.find(topic => topic._id === link.topic)
             )
             return topics
           }, [])
@@ -61,7 +61,7 @@ export default function (hoodie) {
           entities.forEach(element => {
             var current = state.all.find(
               entity =>
-                entity.title == element.title || entity._id == element._id
+                entity.title === element.title || entity._id === element._id
             )
             element.type = type
             element._id = current
