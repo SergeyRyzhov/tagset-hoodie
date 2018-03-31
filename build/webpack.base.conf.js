@@ -17,13 +17,13 @@ var publicPath =
     ? config.build.assetsPublicPath
     : config.dev.assetsPublicPath;
 
-var iconPath =
+var pathWithoutSlash =
   publicPath.indexOf("/") == publicPath.length - 1
     ? publicPath.slice(0, -1)
     : publicPath;
 function mapIcons(icons) {
   return icons.map(function(icon) {
-    icon.src = iconPath + "/static/icons/" + icon.src;
+    icon.src = pathWithoutSlash + "/static/icons/" + icon.src;
     return icon;
   });
 }
@@ -102,8 +102,8 @@ module.exports = {
       title: "TAG#SET",
       icons: {
         android: true,
-        appleIcon: false,
-        appleStartup: false,
+        appleIcon: true,
+        appleStartup: true,
         coast: false,
         favicons: true,
         firefox: true,
@@ -121,7 +121,8 @@ module.exports = {
       lang: "en-US",
       display: "standalone",
       orientation: "any",
-      startUrl: "/index.html",
+      startUrl: pathWithoutSlash + "/index.html",
+      scope: pathWithoutSlash + "/",
       backgroundColor: "#290716",
       themeColor: "#290716",
       icons: mapIcons([
