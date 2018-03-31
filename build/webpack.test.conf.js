@@ -6,6 +6,7 @@ const utils = require('./utils')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.base.conf')
+const OfflinePlugin = require('offline-plugin');
 
 const webpackConfig = merge(baseConfig, {
   // use inline sourcemap for karma-sourcemap-loader
@@ -26,6 +27,8 @@ const webpackConfig = merge(baseConfig, {
     })
   ]
 })
+
+webpackConfig.plugins.push(new OfflinePlugin())
 
 // no need for app entry during tests
 delete webpackConfig.entry
