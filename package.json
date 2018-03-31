@@ -1,7 +1,7 @@
 {
   "name": "tagset",
   "version": "0.1.0",
-  "description": "Tag#set",
+  "description": "Site for selecting your own set of tags",
   "author": "Sergey Ryzhov <serega.rf@gmail.com>",
   "private": true,
   "scripts": {
