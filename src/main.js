@@ -7,7 +7,7 @@ import Hoodie from '@hoodie/client'
 import PouchDB from 'pouchdb'
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 
-import 'bootstrap/dist/css/bootstrap.css'
+import './scss/theme.scss'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'octicons/build/build.css'
 
