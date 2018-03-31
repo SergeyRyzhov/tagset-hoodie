@@ -91,6 +91,7 @@ export default function (hoodie) {
       init ({commit, state}) {
         return hoodie.store.findAll(doc => doc.type === type).then(links => {
           commit('addOrUpdate', links)
+          return links
         })
       }
     },

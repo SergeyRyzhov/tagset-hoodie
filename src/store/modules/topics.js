@@ -86,8 +86,9 @@ export default function (hoodie) {
         return promise
       },
       init ({commit, state}) {
-        return hoodie.store.findAll(doc => doc.type === type).then(links => {
-          commit('addOrUpdate', links)
+        return hoodie.store.findAll(doc => doc.type === type).then(topics => {
+          commit('addOrUpdate', topics)
+          return topics
         })
       }
     },

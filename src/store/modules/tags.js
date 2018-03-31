@@ -90,6 +90,7 @@ export default function (hoodie) {
       init ({commit, state}) {
         return hoodie.store.findAll(doc => doc.type === type).then(tags => {
           commit('addOrUpdate', tags)
+          return tags
         })
       }
     },

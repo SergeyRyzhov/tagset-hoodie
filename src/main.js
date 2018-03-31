@@ -15,6 +15,7 @@ import App from './App.vue'
 import StoreFactory from './store'
 import AccountService from './core/account.js'
 import Logger from './core/logger.js'
+import Config from './config.js'
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
@@ -23,10 +24,9 @@ Vue.use(VueHoodie)
 
 const logger = Logger.getLogger('app')
 
-const url = 'http://localhost:8081'
 var hoodie = new Hoodie({
   PouchDB,
-  url
+  url: Config.hoodieUrl
 })
 
 hoodie.connectionStatus.startChecking({
@@ -47,11 +47,21 @@ new Vue({
   hoodie,
   created () {
     var service = AccountService(this.$hoodie)
-    service.validate(service.sharedUser)
+    this.$hoodie.store.connect().then((object) => {
+      service.validate(service.sharedUser).then(() => {
+        Promise.all([
+          this.$store.dispatch('tags/init'),
+          this.$store.dispatch('topics/init'),
+          this.$store.dispatch('links/init')]).then(args => {
+          logger.info('stores initialized', args)
 
-    this.$store.dispatch('tags/init')
-    this.$store.dispatch('topics/init')
-    this.$store.dispatch('links/init')
+        // this.$hoodie.store.on('pull', function (object) { logger.info('pull', object) })
+        // this.$hoodie.store.on('push', function (object) { logger.info('push', object) })
+        // this.$hoodie.store.on('connect', function (object) { logger.info('connect', object) })
+        // this.$hoodie.store.on('disconnect', function (object) { logger.info('disconnect', object) })
+        })
+      })
+    })
   },
   render: h => h(App)
 }).$mount('#app')
