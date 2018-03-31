@@ -5,13 +5,12 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "start": "hoodie",
     "test": "npm run test:lint && npm run test:karma",
     "test:watch": "npm run test:lint && npm run test:karma:watch",
     "test:lint": "vue-cli-service lint",
     "test:karma": "karma start test/karma.config.js --singleRun",
-    "test:karma:watch": "karma start test/karma.config.js",
-    "start": "hoodie",
-    "start2": "node \"./node_modules/hoodie/bin/start.js\""
+    "test:karma:watch": "karma start test/karma.config.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -39,28 +38,25 @@
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-webpack": "^3.0.0",
     "offline-plugin": "^4.9.0",
-    "vue-template-compiler": "^2.5.13"
+    "vue-template-compiler": "^2.5.13",
+    "webdash": "^1.2.0",
+    "webdash-npm-scripts": "^1.2.0",
+    "webdash-package-json": "^1.2.0",
+    "webdash-performance-budget": "^1.2.0",
+    "webdash-pwa-manifest": "^1.2.0",
+    "webdash-readme-preview": "^1.0.3"
   },
   "babel": {
-    "presets": [
-      "@vue/app"
-    ]
+    "presets": ["@vue/app"]
   },
   "eslintConfig": {
     "root": true,
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ]
+    "extends": ["plugin:vue/essential", "eslint:recommended"]
   },
   "postcss": {
     "plugins": {
       "autoprefixer": {}
     }
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"]
 }
