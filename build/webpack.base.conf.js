@@ -8,7 +8,6 @@ const vueLoaderConfig = require("./vue-loader.conf");
 var FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 var WebappManifest = require("webapp-manifest-plugin");
 var WebappManifestPlugin = WebappManifest.default;
-var FAVICON_PLUGIN = WebappManifest.FAVICON_PLUGIN;
 
 function resolve(dir) {
   return path.join(__dirname, "..", dir);
@@ -17,10 +16,18 @@ var publicPath =
   process.env.NODE_ENV === "production"
     ? config.build.assetsPublicPath
     : config.dev.assetsPublicPath;
+
 var iconPath =
   publicPath.indexOf("/") == publicPath.length - 1
     ? publicPath.slice(0, -1)
     : publicPath;
+function mapIcons(icons) {
+  return icons.map(function(icon) {
+    icon.src = iconPath + "/static/icons/" + icon.src;
+    return icon;
+  });
+}
+
 module.exports = {
   entry: {
     app: "./src/main.js"
@@ -86,18 +93,17 @@ module.exports = {
   },
   plugins: [
     new FaviconsWebpackPlugin({
-      logo: "./static/icons/logo.png",
-      prefix: "tagset/icons-[hash]/",
-      emitStats: true,
-      statsFilename: "iconstats-[hash].json",
+      logo: "./src/assets/icons/logo.svg",
+      prefix: "icons-[hash]/",
+      emitStats: false,
       persistentCache: true,
       inject: true,
       background: "#fff",
       title: "TAG#SET",
       icons: {
         android: true,
-        appleIcon: true,
-        appleStartup: true,
+        appleIcon: false,
+        appleStartup: false,
         coast: false,
         favicons: true,
         firefox: true,
@@ -118,27 +124,54 @@ module.exports = {
       startUrl: "/index.html",
       backgroundColor: "#290716",
       themeColor: "#290716",
-      // icons: FAVICON_PLUGIN,
-      icons: [
+      icons: mapIcons([
         {
-          src: iconPath+"/static/icons/logo.png",
+          src: "android-chrome-36x36.png",
+          sizes: "36x36",
+          type: "image/png"
+        },
+        {
+          src: "android-chrome-48x48.png",
           sizes: "48x48",
           type: "image/png"
         },
         {
-          src: iconPath+"/static/icons/android-chrome-192x192.png",
+          src: "android-chrome-72x72.png",
+          sizes: "72x72",
+          type: "image/png"
+        },
+        {
+          src: "android-chrome-96x96.png",
+          sizes: "96x96",
+          type: "image/png"
+        },
+        {
+          src: "android-chrome-144x144.png",
+          sizes: "144x144",
+          type: "image/png"
+        },
+        {
+          src: "android-chrome-192x192.png",
           sizes: "192x192",
           type: "image/png"
         },
         {
-          src: iconPath+"/static/icons/android-chrome-515x512.png",
-          sizes: "515x512",
+          src: "android-chrome-256x256.png",
+          sizes: "256x256",
+          type: "image/png"
+        },
+        {
+          src: "android-chrome-384x384.png",
+          sizes: "384x384",
+          type: "image/png"
+        },
+        {
+          src: "android-chrome-512x512.png",
+          sizes: "512x512",
           type: "image/png"
         }
-      ],
+      ]),
       preferRelatedApplications: false
-      // , relatedApplications: []
-      // , scope: "/tagset"
     })
   ]
 };
