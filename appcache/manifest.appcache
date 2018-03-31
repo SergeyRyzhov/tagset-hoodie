@@ -1,23 +1,45 @@
 CACHE MANIFEST
-#ver:2018-3-31 23:07:47
+#ver:2018-3-31 23:32:22
 #plugin:4.9.0
 
 CACHE:
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-icon-60x60.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-icon-76x76.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-icon-57x57.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-icon-72x72.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-icon-precomposed.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-icon-180x180.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-icon-120x120.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-icon.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-icon-152x152.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-icon-167x167.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-icon-114x114.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-icon-144x144.png
 /tagset/icons-efe5c788f80e3170a033b438d908767a/favicon-32x32.png
 /tagset/icons-efe5c788f80e3170a033b438d908767a/favicon-16x16.png
 /tagset/icons-efe5c788f80e3170a033b438d908767a/favicon.ico
 /tagset/icons-efe5c788f80e3170a033b438d908767a/android-chrome-72x72.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/android-chrome-96x96.png
 /tagset/icons-efe5c788f80e3170a033b438d908767a/android-chrome-36x36.png
 /tagset/icons-efe5c788f80e3170a033b438d908767a/android-chrome-48x48.png
-/tagset/icons-efe5c788f80e3170a033b438d908767a/android-chrome-96x96.png
-/tagset/icons-efe5c788f80e3170a033b438d908767a/android-chrome-256x256.png
-/tagset/icons-efe5c788f80e3170a033b438d908767a/android-chrome-144x144.png
 /tagset/icons-efe5c788f80e3170a033b438d908767a/android-chrome-192x192.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/android-chrome-144x144.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/android-chrome-256x256.png
 /tagset/icons-efe5c788f80e3170a033b438d908767a/android-chrome-384x384.png
 /tagset/icons-efe5c788f80e3170a033b438d908767a/android-chrome-512x512.png
 /tagset/icons-efe5c788f80e3170a033b438d908767a/firefox_app_60x60.png
 /tagset/icons-efe5c788f80e3170a033b438d908767a/firefox_app_128x128.png
 /tagset/icons-efe5c788f80e3170a033b438d908767a/firefox_app_512x512.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-startup-image-320x460.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-startup-image-640x920.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-startup-image-640x1096.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-startup-image-748x1024.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-startup-image-768x1004.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-startup-image-750x1294.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-startup-image-1242x2148.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-startup-image-1182x2208.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-startup-image-1496x2048.png
+/tagset/icons-efe5c788f80e3170a033b438d908767a/apple-touch-startup-image-1536x2008.png
 /tagset/icons-efe5c788f80e3170a033b438d908767a/manifest.json
 /tagset/icons-efe5c788f80e3170a033b438d908767a/manifest.webapp
 /tagset/static/js/vendor.8cb1fb45db2a7dcc3efe.js
@@ -26,14 +48,14 @@ CACHE:
 /tagset/static/css/app.3519c876a75d656853578dded75a147c.css
 /tagset/manifest.json
 /tagset/
-/tagset/static/icons/android-chrome-384x384.png
+/tagset/static/icons/android-chrome-144x144.png
 /tagset/static/icons/android-chrome-192x192.png
 /tagset/static/icons/android-chrome-36x36.png
 /tagset/static/icons/android-chrome-256x256.png
+/tagset/static/icons/android-chrome-384x384.png
 /tagset/static/icons/android-chrome-48x48.png
-/tagset/static/icons/android-chrome-144x144.png
-/tagset/static/icons/android-chrome-512x512.png
 /tagset/static/icons/android-chrome-72x72.png
+/tagset/static/icons/android-chrome-512x512.png
 /tagset/static/icons/android-chrome-96x96.png
 
 NETWORK:
