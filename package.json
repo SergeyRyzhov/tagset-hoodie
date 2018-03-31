@@ -25,6 +25,7 @@
     "lodash": "^4.17.5",
     "octicons": "^7.2.0",
     "pouchdb": "^6.4.3",
+    "uuid": "^3.2.1",
     "vue": "^2.5.13",
     "vue-hoodie": "git+https://github.com/SergeyRyzhov/vue-hoodie.git",
     "vue-router": "^3.0.1",

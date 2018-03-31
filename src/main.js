@@ -48,6 +48,10 @@ new Vue({
   created () {
     var service = AccountService(this.$hoodie)
     service.validate(service.sharedUser)
+
+    this.$store.dispatch('tags/init')
+    this.$store.dispatch('topics/init')
+    this.$store.dispatch('links/init')
   },
   render: h => h(App)
 }).$mount('#app')
