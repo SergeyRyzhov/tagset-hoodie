@@ -1,3 +1,4 @@
 export default {
-  level: 2
+  level: 2,
+  allowGroupping: true
 };

@@ -21,15 +21,15 @@ function LoggerFactory() {
 function getLogger(name, level) {
   level = level || Config.level;
   let mapping = {
-    group: { enabled: true, lazy: true },
-    groupCollapsed: { enabled: true, lazy: true },
-    groupEnd: { enabled: true, evaluate: true },
-    log: { enabled: level >= this.levels.all, evaluate1: true },
-    trace: { enabled: level >= this.levels.trace, evaluate1: true },
-    debug: { enabled: level >= this.levels.debug, evaluate1: true },
-    info: { enabled: level >= this.levels.info, evaluate1: true },
-    warn: { enabled: level >= this.levels.warn, evaluate1: true },
-    error: { enabled: level >= this.levels.error, evaluate1: true }
+    group: { enabled: Config.allowGroupping, lazy: true },
+    groupCollapsed: { enabled: Config.allowGroupping, lazy: true },
+    groupEnd: { enabled: Config.allowGroupping, evaluate: true },
+    log: { enabled: level >= this.levels.all },
+    trace: { enabled: level >= this.levels.trace },
+    debug: { enabled: level >= this.levels.debug },
+    info: { enabled: level >= this.levels.info },
+    warn: { enabled: level >= this.levels.warn },
+    error: { enabled: level >= this.levels.error }
   };
   var logger = {};
   for (const method in mapping) {
@@ -73,38 +73,53 @@ function _getCaller() {
 
 function _buildAppender(config) {
   return (message, ...args) => {
-    let caller = _getCaller();
-    let info = "";
-    if (caller.method) {
-      let customMessage = "%s: %s {%o} " + message;
-      info = [
-        customMessage,
-        config.name,
-        caller.method || config.name,
-        caller.place
-      ];
-    } else {
-      let customMessage = "%s: {%o} " + message;
-      info = [customMessage, config.name, caller.place];
-    }
+    try {
+      let caller = _getCaller();
+      let info = "";
+      if (caller.method) {
+        let customMessage = "%s: %s {%o} " + message;
+        info = [
+          customMessage,
+          config.name,
+          caller.method || config.name,
+          caller.place
+        ];
+      } else {
+        let customMessage = "%s: {%o} " + message;
+        info = [customMessage, config.name, caller.place];
+      }
 
-    if (config.lazy) {
-      config.buffer.push([]);
-    }
+      let currentCache = { method: config.method, args: [...info, ...args] };
+      if (config.lazy) {
+        config.buffer.push([currentCache]);
+        return;
+      }
 
-    var buffer =
-      config.buffer.length == 0
-        ? config.buffer
-        : config.buffer[config.buffer.length - 1];
-    buffer.push({ method: config.method, args: [...info, ...args] });
+      if (config.evaluate && config.buffer.length > 0) {
+        buffer = config.buffer.pop();
+        if (buffer.length <= 1) return;
 
-    if (config.evaluate || config.buffer.length == 0) {
-      if (buffer.length > 2)
+        buffer.push(currentCache);
         while (buffer.length > 0) {
-          var cache = buffer.shift();
+          let cache = buffer.shift();
           console[cache.method].apply(null, cache.args);
         }
-      if (config.buffer.length > 0) config.buffer.pop();
+      }
+
+      let buffer =
+        config.buffer.length > 0
+          ? !Array.isArray(config.buffer[config.buffer.length - 1])
+            ? config.buffer
+            : config.buffer[config.buffer.length - 1]
+          : config.buffer;
+
+      buffer.push(currentCache);
+      if (buffer === config.buffer) {
+        let cache = buffer.shift();
+        console[cache.method].apply(null, cache.args);
+      }
+    } catch (e) {
+      console.error("Logger error", e);
     }
   };
 }

@@ -15,18 +15,22 @@ export default function(hoodie) {
     state: {
       all: [
         {
+          _id:'l1',
           topic: "i1",
           tag: "i1"
         },
         {
+          _id:'l2',
           topic: "i1",
           tag: "i2"
         },
         {
+          _id:'l3',
           topic: "i2",
           tag: "i2"
         },
         {
+          _id:'l4',
           topic: "i2",
           tag: "i3"
         }
@@ -93,10 +97,10 @@ export default function(hoodie) {
     },
     mutations: {
       remove(state, entities) {
-        _Array.remove(state.all, entities, ['topic', 'tag']);
+        _Array.remove(state.all, entities, ["topic", "tag"]);
       },
       addOrUpdate(state, entities) {
-        _Array.addOrUpdate(state.all, entities, "_id");
+        _Array.addOrUpdate(state.all, entities, ["topic", "tag"]);
       }
     }
   };

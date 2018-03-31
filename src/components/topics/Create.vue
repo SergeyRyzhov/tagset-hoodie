@@ -66,12 +66,32 @@ export default {
         this.saveTagsToDb(formTags)
       ]).then(
         function(args) {
-          let topic = args[0];
+          let topic = args[0].pop();
           let tags = args[1];
-          logger.debug("DB results", topic);
-          logger.debug("DB results", tags);
 
-          this.$set(this, "form", defaultForm());
+          var formLinks = tags.map(tag => {
+            return {
+              tag: tag._id,
+              topic: topic._id
+            };
+          });
+
+          return this.saveLinksToDb(formLinks).then(
+            function(links) {
+              // this.$set(this, "form", defaultForm());
+              logger.trace(
+                "DB results topic: %o, tags: %o, links %o",
+                topic,
+                tags,
+                links
+              );
+
+              this.$router.push({
+                name: "topic-edit",
+                params: { id: topic._id, topic }
+              });
+            }.bind(this)
+          );
         }.bind(this)
       );
     }

@@ -46,10 +46,10 @@ export default {
   }
 };
 
-function buildComparerByProps(...props) {
+function buildComparerByProps(props) {
   return (a, b) => {
     logger.group();
-    logger.trace("compare %o %o", a, b);
+    logger.trace("compare %o %o by %o", a, b, props);
     if (a === b) {
       logger.trace("equal");
       logger.groupEnd();
