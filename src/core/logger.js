@@ -1,9 +1,9 @@
-/*eslint no-console: ["off"] */
-import Config from "../config.js";
+/* eslint no-console: ["off"] */
+import Config from '../config.js'
 
-export default new LoggerFactory();
+export default new LoggerFactory()
 
-function LoggerFactory() {
+function LoggerFactory () {
   this.levels = {
     error: 0,
     warn: 1,
@@ -11,15 +11,15 @@ function LoggerFactory() {
     debug: 3,
     trace: 4,
     all: 5
-  };
+  }
 
-  this.getLogger = getLogger.bind(this);
+  this.getLogger = getLogger.bind(this)
 
-  this._buffer = [];
+  this._buffer = []
 }
 
-function getLogger(name, level) {
-  level = level || Config.level;
+function getLogger (name, level) {
+  level = level || Config.level
   let mapping = {
     group: { enabled: Config.allowGroupping, lazy: true },
     groupCollapsed: { enabled: Config.allowGroupping, lazy: true },
@@ -30,10 +30,10 @@ function getLogger(name, level) {
     info: { enabled: level >= this.levels.info },
     warn: { enabled: level >= this.levels.warn },
     error: { enabled: level >= this.levels.error }
-  };
-  var logger = {};
+  }
+  var logger = {}
   for (const method in mapping) {
-    var options = mapping[method];
+    var options = mapping[method]
     if (options.enabled) {
       // if (!options.lazy && !options.evaluate) {
       logger[method] = _buildAppender({
@@ -42,67 +42,67 @@ function getLogger(name, level) {
         name,
         evaluate: !!options.evaluate,
         lazy: !!options.lazy
-      });
+      })
       // }else{
 
       // }
-    } else logger[method] = () => {};
+    } else logger[method] = () => {}
   }
 
-  return logger;
+  return logger
 }
 
-function _getCaller() {
+function _getCaller () {
   const error = (() => {
     try {
-      throw new Error();
+      throw new Error()
     } catch (e) {
-      return e;
+      return e
     }
-  })();
-  const stackLines = (!error.stack ? "" : error.stack).split("\n");
-  const callerLine = stackLines[4] || "";
-  const tokens = callerLine.split(/\s+/);
-  const place = tokens.pop();
-  const method = tokens.length >= 3 ? tokens.pop() : null;
+  })()
+  const stackLines = (!error.stack ? '' : error.stack).split('\n')
+  const callerLine = stackLines[4] || ''
+  const tokens = callerLine.split(/\s+/)
+  const place = tokens.pop()
+  const method = tokens.length >= 3 ? tokens.pop() : null
   return {
     method,
     place
-  };
+  }
 }
 
-function _buildAppender(config) {
+function _buildAppender (config) {
   return (message, ...args) => {
     try {
-      let caller = _getCaller();
-      let info = "";
+      let caller = _getCaller()
+      let info = ''
       if (caller.method) {
-        let customMessage = "%s: %s {%o} " + message;
+        let customMessage = '%s: %s {%o} ' + message
         info = [
           customMessage,
           config.name,
           caller.method || config.name,
           caller.place
-        ];
+        ]
       } else {
-        let customMessage = "%s: {%o} " + message;
-        info = [customMessage, config.name, caller.place];
+        let customMessage = '%s: {%o} ' + message
+        info = [customMessage, config.name, caller.place]
       }
 
-      let currentCache = { method: config.method, args: [...info, ...args] };
+      let currentCache = { method: config.method, args: [...info, ...args] }
       if (config.lazy) {
-        config.buffer.push([currentCache]);
-        return;
+        config.buffer.push([currentCache])
+        return
       }
 
       if (config.evaluate && config.buffer.length > 0) {
-        buffer = config.buffer.pop();
-        if (buffer.length <= 1) return;
+        let buffer = config.buffer.pop()
+        if (buffer.length <= 1) return
 
-        buffer.push(currentCache);
+        buffer.push(currentCache)
         while (buffer.length > 0) {
-          let cache = buffer.shift();
-          console[cache.method].apply(null, cache.args);
+          let cache = buffer.shift()
+          console[cache.method].apply(null, cache.args)
         }
       }
 
@@ -111,15 +111,15 @@ function _buildAppender(config) {
           ? !Array.isArray(config.buffer[config.buffer.length - 1])
             ? config.buffer
             : config.buffer[config.buffer.length - 1]
-          : config.buffer;
+          : config.buffer
 
-      buffer.push(currentCache);
+      buffer.push(currentCache)
       if (buffer === config.buffer) {
-        let cache = buffer.shift();
-        console[cache.method].apply(null, cache.args);
+        let cache = buffer.shift()
+        console[cache.method].apply(null, cache.args)
       }
     } catch (e) {
-      console.error("Logger error", e);
+      console.error('Logger error', e)
     }
-  };
+  }
 }

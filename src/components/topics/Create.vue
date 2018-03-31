@@ -14,23 +14,23 @@
 </template>
 
 <script>
-import Logger from "../../core/logger.js";
-const logger = Logger.getLogger("topic.create.component");
+import Logger from '../../core/logger.js'
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 
-import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
+const logger = Logger.getLogger('topic.create.component')
 
-function defaultForm() {
+function defaultForm () {
   return {
-    title: "",
-    tags: "",
+    title: '',
+    tags: '',
     rate: 10
-  };
+  }
 }
 export default {
-  data() {
+  data () {
     return {
       form: defaultForm()
-    };
+    }
   },
   computed: {
     ...mapState({}),
@@ -38,26 +38,26 @@ export default {
   },
   methods: {
     ...mapActions({
-      saveToDb: "topics/addOrUpdate",
-      saveLinksToDb: "links/addOrUpdate",
-      saveTagsToDb: "tags/addOrUpdate"
+      saveToDb: 'topics/addOrUpdate',
+      saveLinksToDb: 'links/addOrUpdate',
+      saveTagsToDb: 'tags/addOrUpdate'
     }),
     ...mapMutations({}),
-    save(form) {
-      logger.debug("form data", form);
+    save (form) {
+      logger.debug('form data', form)
       if (!form.title) {
-        return;
+        return
       }
 
-      var formTags = (form.tags || "")
-        .split(" ")
-        .filter(t => t.indexOf("#") == 0)
+      var formTags = (form.tags || '')
+        .split(' ')
+        .filter(t => t.indexOf('#') === 0)
         .map(x => {
           return {
             title: x.substring(1)
-          };
-        });
-      logger.debug("form tags", formTags);
+          }
+        })
+      logger.debug('form tags', formTags)
       Promise.all([
         this.saveToDb({
           title: form.title,
@@ -65,36 +65,36 @@ export default {
         }),
         this.saveTagsToDb(formTags)
       ]).then(
-        function(args) {
-          let topic = args[0].pop();
-          let tags = args[1];
+        function (args) {
+          let topic = args[0].pop()
+          let tags = args[1]
 
           var formLinks = tags.map(tag => {
             return {
               tag: tag._id,
               topic: topic._id
-            };
-          });
+            }
+          })
 
           return this.saveLinksToDb(formLinks).then(
-            function(links) {
+            function (links) {
               // this.$set(this, "form", defaultForm());
               logger.trace(
-                "DB results topic: %o, tags: %o, links %o",
+                'DB results topic: %o, tags: %o, links %o',
                 topic,
                 tags,
                 links
-              );
+              )
 
               this.$router.push({
-                name: "topic-edit",
+                name: 'topic-edit',
                 params: { id: topic._id, topic }
-              });
+              })
             }.bind(this)
-          );
+          )
         }.bind(this)
-      );
+      )
     }
   }
-};
+}
 </script>

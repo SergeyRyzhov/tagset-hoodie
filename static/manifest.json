@@ -1,0 +1,25 @@
+{
+  "name": "TAG#SET",
+  "short_name": "Tagset",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#290716",
+  "icons": [
+    {
+      "src": "/static/img/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/img/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/img/icons/logo-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    }
+  ],
+  "description": "Site for selecting your own set of tags"
+}

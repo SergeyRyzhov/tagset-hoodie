@@ -1,1 +1,1 @@
-export { default as _Array } from "./Array.js";
+export { default as _Array } from './Array.js'

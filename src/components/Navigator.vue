@@ -15,7 +15,7 @@
         <b-nav-item :to="{ path: '/history' }">History</b-nav-item>
         <b-nav-item :to="{ path: '/statistic' }">Statistic</b-nav-item>
       </b-navbar-nav>
-      <!-- <b-navbar-nav class="ml-auto">       
+      <!-- <b-navbar-nav class="ml-auto">
         <b-nav-form>
           <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search"/>
           <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
@@ -42,39 +42,39 @@
 </template>
 
 <script>
-  import Logger from "../core/logger.js";
-  import octicons from "octicons";
-  const logger = Logger.getLogger("navigator.component");
+  import Logger from '../core/logger.js'
+import octicons from 'octicons'
+const logger = Logger.getLogger('navigator.component')
 
-  export default {
-    name: "Navigator",
-    data() {
+export default {
+    name: 'Navigator',
+    data () {
       return {
         connectionStatus: true,
         octicons
-      };
-    },
-    methods: {
-      checkStatus() {
-        var status = this.$hoodie.connectionStatus;
-        status.check();
-      },
-      connected() {
-        logger.info("API status: online");
-        this.$set(this, "connectionStatus", true);
-      },
-      disconnected() {
-        logger.info("API status: offline");
-        this.$set(this, "connectionStatus", false);
       }
     },
-    mounted() {
-      var status = this.$hoodie.connectionStatus;
-      status.on("reconnect", this.connected.bind(this));
-      status.on("reset", this.connected.bind(this));
-      status.on("disconnect", this.disconnected.bind(this));
-      this.checkStatus();
+    methods: {
+      checkStatus () {
+        var status = this.$hoodie.connectionStatus
+        status.check()
+      },
+      connected () {
+        logger.info('API status: online')
+        this.$set(this, 'connectionStatus', true)
+      },
+      disconnected () {
+        logger.info('API status: offline')
+        this.$set(this, 'connectionStatus', false)
+      }
+    },
+    mounted () {
+      var status = this.$hoodie.connectionStatus
+      status.on('reconnect', this.connected.bind(this))
+      status.on('reset', this.connected.bind(this))
+      status.on('disconnect', this.disconnected.bind(this))
+      this.checkStatus()
     },
     computed: {}
-  };
+  }
 </script>

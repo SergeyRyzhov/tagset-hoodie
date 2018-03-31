@@ -18,11 +18,11 @@
 <script>
   import {
     mapState
-  } from "vuex";
+  } from 'vuex'
 
-  export default {
-    data() {
-      return {};
+export default {
+    data () {
+      return {}
     },
     computed: {
       ...mapState({
@@ -32,7 +32,7 @@
       })
     },
     methods: {}
-  };
+  }
 </script>
 
 <style scoped>
