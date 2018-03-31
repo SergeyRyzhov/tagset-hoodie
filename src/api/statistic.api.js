@@ -1,12 +1,13 @@
-import Axios from 'axios';
+import Axios from 'axios'
 
-function getStatistics(title) {
-    return Axios.get('/api/statistic/' + encodeURIComponent(title))
-        .then(response => {
-            return response.data;
-        });
+function getStatistics (title) {
+  return Axios.get('/api/statistic/' + encodeURIComponent(title)).then(
+    response => {
+      return response.data
+    }
+  )
 }
 
 export default {
-    getStatistics
+  getStatistics
 }

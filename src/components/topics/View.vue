@@ -15,29 +15,29 @@
     mapGetters,
     mapActions,
     mapMutations
-  } from "vuex";
+  } from 'vuex'
 
-  export default {
-    data() {
-      return {};
-    },
-    mounted() {},
+export default {
+    data () {
+      return {}
+  },
+    mounted () {},
     watch: {},
     computed: {
       ...mapState({}),
       ...mapGetters({
-        tags: "topics/tags"
+        tags: 'topics/tags'
       }),
-      topic() {
+      topic () {
         var topic = this.$route.params.topic || {
           _id: this.$route.params.id
-        };
-        return this.$store.getters["topics/findWhere"](topic);
+        }
+        return this.$store.getters['topics/findWhere'](topic)
       }
     },
     methods: {
       ...mapActions({}),
       ...mapMutations({})
     }
-  };
+  }
 </script>

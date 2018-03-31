@@ -42,39 +42,39 @@
 </template>
 
 <script>
-  import Logger from "../core/logger.js";
-  import octicons from "octicons";
-  const logger = Logger.getLogger("navigator.component");
+  import Logger from '../core/logger.js'
+import octicons from 'octicons'
+const logger = Logger.getLogger('navigator.component')
 
-  export default {
-    name: "Navigator",
-    data() {
+export default {
+    name: 'Navigator',
+    data () {
       return {
         connectionStatus: true,
         octicons
-      };
-    },
+      }
+  },
     methods: {
-      checkStatus() {
-        var status = this.$hoodie.connectionStatus;
-        status.check();
+      checkStatus () {
+        var status = this.$hoodie.connectionStatus
+        status.check()
       },
-      connected() {
-        logger.info("API status: online");
-        this.$set(this, "connectionStatus", true);
+      connected () {
+        logger.info('API status: online')
+        this.$set(this, 'connectionStatus', true)
       },
-      disconnected() {
-        logger.info("API status: offline");
-        this.$set(this, "connectionStatus", false);
+      disconnected () {
+        logger.info('API status: offline')
+        this.$set(this, 'connectionStatus', false)
       }
     },
-    mounted() {
-      var status = this.$hoodie.connectionStatus;
-      status.on("reconnect", this.connected.bind(this));
-      status.on("reset", this.connected.bind(this));
-      status.on("disconnect", this.disconnected.bind(this));
-      this.checkStatus();
-    },
+    mounted () {
+      var status = this.$hoodie.connectionStatus
+      status.on('reconnect', this.connected.bind(this))
+      status.on('reset', this.connected.bind(this))
+      status.on('disconnect', this.disconnected.bind(this))
+      this.checkStatus()
+  },
     computed: {}
-  };
+  }
 </script>

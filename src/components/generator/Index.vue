@@ -28,20 +28,20 @@
 </template>
 
 <script>
-  import clipboard from "clipboard-polyfill";
-  import {
+  import clipboard from 'clipboard-polyfill'
+import {
     mapState
-  } from "vuex";
+  } from 'vuex'
 
-  export default {
-    data() {
+export default {
+    data () {
       return {
         selectedTopics: {},
         selectedTags: {},
 
-        combinedTags: ""
-      };
-    },
+        combinedTags: ''
+      }
+  },
     computed: {
       ...mapState({
         topics: state => state.topics.all,
@@ -50,68 +50,68 @@
       })
     },
     methods: {
-      toggleTopic(topic) {
-        debugger;
+      toggleTopic (topic) {
+        debugger
         if (this.selectedTopics.hasOwnProperty(topic._id)) {
-          this.$delete(this.selectedTags, topic._id);
-          this.$delete(this.selectedTopics, topic._id);
+          this.$delete(this.selectedTags, topic._id)
+          this.$delete(this.selectedTopics, topic._id)
         } else {
-          this.$set(this.selectedTopics, topic._id, topic);
+          this.$set(this.selectedTopics, topic._id, topic)
           this.$set(
             this.selectedTags,
             topic._id,
             this._tagsOfTopic(topic)
-            .sort((a, b) => b.rate - a.rate)
-            .reduce(function (result, tag) {
-              result[tag._id] = {
-                tag,
-                include: true
-              };
-              return result;
-            }, {})
-          );
+              .sort((a, b) => b.rate - a.rate)
+              .reduce(function (result, tag) {
+                result[tag._id] = {
+                  tag,
+                  include: true
+                }
+                return result
+              }, {})
+          )
         }
       },
-      toggleTag(topic, tag) {
+      toggleTag (topic, tag) {
         const {
           include
-        } = this.selectedTags[topic._id][tag._id];
-        this.$set(this.selectedTags[topic._id][tag._id], "include", !include);
+        } = this.selectedTags[topic._id][tag._id]
+        this.$set(this.selectedTags[topic._id][tag._id], 'include', !include)
       },
-      combine() {
-        let tags = [];
+      combine () {
+        let tags = []
         for (const topicId in this.selectedTags) {
           for (const tagId in this.selectedTags[topicId]) {
             const {
               tag,
               include
-            } = this.selectedTags[topicId][tagId];
-            if (!include) continue;
-            tags.push(tag);
+            } = this.selectedTags[topicId][tagId]
+            if (!include) continue
+            tags.push(tag)
           }
         }
         let combinedTags = tags
-          .filter(function uniq(value, index, self) {
-            return self.indexOf(value) === index;
+          .filter(function uniq (value, index, self) {
+            return self.indexOf(value) === index
           })
           .sort((a, b) => b.rate - a.rate)
-          .map(tag => "#" + tag.title)
-          .join(" ");
-        this.$set(this, "combinedTags", combinedTags.trim());
+          .map(tag => '#' + tag.title)
+          .join(' ')
+        this.$set(this, 'combinedTags', combinedTags.trim())
       },
-      toBuffer() {
-        clipboard.writeText(this.combinedTags);
+      toBuffer () {
+        clipboard.writeText(this.combinedTags)
       },
-      _tagsOfTopic(topic) {
+      _tagsOfTopic (topic) {
         return this.links.filter(link => link.topic == topic._id).reduce(
-          ((tags, link) => {
-            tags.push(this.tags.find(tag => tag._id == link.tag));
-            return tags;
-          }).bind(this), []
-        );
+          (tags, link) => {
+            tags.push(this.tags.find(tag => tag._id == link.tag))
+            return tags
+          }, []
+        )
       }
     }
-  };
+  }
 </script>
 
 <style scoped>

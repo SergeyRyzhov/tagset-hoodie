@@ -6,16 +6,16 @@
 </template>
 
 <script>
-  import Navigator from "./components/Navigator.vue";
-  import router from "./router";
+  import Navigator from './components/Navigator.vue'
+import router from './router'
 
-  export default {
-    name: "app",
+export default {
+    name: 'app',
     components: {
       Navigator
     },
     router
-  };
+  }
 </script>
 
 <style>

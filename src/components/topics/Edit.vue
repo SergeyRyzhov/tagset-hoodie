@@ -20,38 +20,40 @@
     mapGetters,
     mapActions,
     mapMutations
-  } from "vuex";
+  } from 'vuex'
 
-  export default {
-    data() {
-      return {};
-    },
-    mounted() {},
+export default {
+    data () {
+      return {}
+  },
+    mounted () {},
     watch: {
-      topic(x) {
-        if (!x) this.$router.push({
-          path: "/topics"
-        });
+      topic (x) {
+        if (!x) {
+          this.$router.push({
+            path: '/topics'
+          })
+        }
       }
     },
     computed: {
       ...mapState({}),
       ...mapGetters({
-        tags: "topics/tags"
+        tags: 'topics/tags'
       }),
-      topic() {
+      topic () {
         var topic = this.$route.params.topic || {
           _id: this.$route.params.id
-        };
-        return this.$store.getters["topics/findWhere"](topic);
+        }
+        return this.$store.getters['topics/findWhere'](topic)
       }
     },
     methods: {
       ...mapActions({
-        remove: "topics/remove",
-        removeLink: "links/remove"
+        remove: 'topics/remove',
+        removeLink: 'links/remove'
       }),
       ...mapMutations({})
     }
-  };
+  }
 </script>
