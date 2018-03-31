@@ -1,3 +1,5 @@
+import uuid from 'uuid'
+
 import Logger from '../../core/logger.js'
 import { _Array } from '../../core/sugar'
 
@@ -14,26 +16,6 @@ export default function (hoodie) {
     namespaced: true,
     state: {
       all: [
-        {
-          _id: 'l1',
-          topic: 'i1',
-          tag: 'i1'
-        },
-        {
-          _id: 'l2',
-          topic: 'i1',
-          tag: 'i2'
-        },
-        {
-          _id: 'l3',
-          topic: 'i2',
-          tag: 'i2'
-        },
-        {
-          _id: 'l4',
-          topic: 'i2',
-          tag: 'i3'
-        }
       ]
     },
     getters: {
@@ -66,11 +48,17 @@ export default function (hoodie) {
             return promise
           })
         ).then(links => {
-          if (links.length > 0) {
-            commit('remove', links)
-            logger.debug('links were removed', links)
-          }
-          return links
+          return hoodie.store.remove(links)
+            .then(links => {
+              if (links.length > 0) {
+                commit('remove', links)
+                logger.debug('links were removed', links)
+              }
+              return links
+            })
+            .catch(reason => {
+              logger.error('Failed to remove', reason)
+            })
         })
       },
       addOrUpdate ({ commit, state }, entities) {
@@ -86,13 +74,25 @@ export default function (hoodie) {
             element.type = type
             element._id = current
               ? current._id
-              : 'id' + Math.random() * 1000000
+              : uuid()
           })
 
-          commit('addOrUpdate', entities)
-          resolve(entities)
+          hoodie.store.updateOrAdd(entities)
+            .then(links => {
+              commit('addOrUpdate', links)
+              resolve(links)
+            })
+            .catch(reason => {
+              logger.error('Failed to save', reason)
+            })
         })
         return promise
+      },
+      init ({commit, state}) {
+        return hoodie.store.findAll(doc => doc.type === type).then(links => {
+          commit('addOrUpdate', links)
+          return links
+        })
       }
     },
     mutations: {

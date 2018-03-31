@@ -51,7 +51,6 @@ export default {
     },
     methods: {
       toggleTopic (topic) {
-        debugger
         if (this.selectedTopics.hasOwnProperty(topic._id)) {
           this.$delete(this.selectedTags, topic._id)
           this.$delete(this.selectedTopics, topic._id)

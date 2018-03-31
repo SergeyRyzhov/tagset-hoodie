@@ -1,3 +1,5 @@
+import uuid from 'uuid'
+
 import Logger from '../../core/logger.js'
 import { _Array } from '../../core/sugar'
 
@@ -13,7 +15,8 @@ export default function (hoodie) {
   return {
     namespaced: true,
     state: {
-      all: [{ title: 'nature', _id: 'i1' }, { title: 'tech', _id: 'i2' }]
+      all: [
+      ]
     },
     getters: {
       tags: (state, getters, rootState) => topic => {
@@ -45,7 +48,15 @@ export default function (hoodie) {
         ).then(links => {
           links = _Array.flatten(links)
           logger.debug('links were removed', links)
-          commit('remove', entities)
+
+          return hoodie.store.remove(entities)
+            .then(topics => {
+              commit('remove', topics)
+              return topics
+            })
+            .catch(reason => {
+              logger.error('Failed to remove', reason)
+            })
         })
       },
       addOrUpdate ({ commit, state }, entities) {
@@ -60,13 +71,25 @@ export default function (hoodie) {
             element.type = type
             element._id = current
               ? current._id
-              : 'id' + Math.random() * 1000000
+              : uuid()
           })
 
-          commit('addOrUpdate', entities)
-          resolve(entities)
+          hoodie.store.updateOrAdd(entities)
+            .then(topics => {
+              commit('addOrUpdate', topics)
+              resolve(topics)
+            })
+            .catch(reason => {
+              logger.error('Failed to save', reason)
+            })
         })
         return promise
+      },
+      init ({commit, state}) {
+        return hoodie.store.findAll(doc => doc.type === type).then(topics => {
+          commit('addOrUpdate', topics)
+          return topics
+        })
       }
     },
     mutations: {
