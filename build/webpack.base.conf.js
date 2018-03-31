@@ -93,7 +93,7 @@ module.exports = {
   },
   plugins: [
     new FaviconsWebpackPlugin({
-      logo: "./src/assets/icons/logo.svg",
+      logo: "./static/icons/logo.svg",
       prefix: "icons-[hash]/",
       emitStats: false,
       persistentCache: true,
@@ -126,6 +126,11 @@ module.exports = {
       backgroundColor: "#290716",
       themeColor: "#290716",
       icons: mapIcons([
+        {
+          src: "logo.svg",
+          sizes: "any",
+          type: "image/svg+xml"
+        },
         {
           src: "android-chrome-36x36.png",
           sizes: "36x36",
