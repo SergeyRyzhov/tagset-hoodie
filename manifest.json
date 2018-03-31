@@ -6,7 +6,7 @@
   "lang": "en-US",
   "display": "standalone",
   "orientation": "any",
-  "start_url": "/index.html",
+  "start_url": "/tagset/index.html",
   "background_color": "#290716",
   "theme_color": "#290716",
   "icons": [
