@@ -2,11 +2,11 @@ var log = require('npmlog')
 var Hapi = require('hapi')
 
 var hoodiePath = 'hoodie/cli/'
-var assureFolders = require(hoodiePath+'assure-folders')
-var compatibilityCheck = require(hoodiePath+'compatibility-check.js')
-var getOptions = require(hoodiePath+'options')
-var getHapiOptions = require(hoodiePath+'hapi-options')
-var parseOptions = require(hoodiePath+'parse-options')
+var assureFolders = require(hoodiePath + "assure-folders");
+var compatibilityCheck = require(hoodiePath + "compatibility-check.js");
+var getOptions = require(hoodiePath + "options");
+var getHapiOptions = require(hoodiePath + "hapi-options");
+var parseOptions = require(hoodiePath + "parse-options");
 
 var hoodie = require('hoodie/server').register
 
@@ -20,10 +20,10 @@ function run (callback) {
     var projectPath = process.cwd()
     var options = getOptions(projectPath)
 
-    options.address = process.env.ADDRESS;
+    options.address = undefined;
     options.port = process.env.PORT;
-    console.log('OPTIONS', options);
 
+    console.log('OPTIONS', options);
     console.log('ENV', process.env);
 
     log.level = options.loglevel
