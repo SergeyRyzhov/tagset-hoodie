@@ -24,7 +24,7 @@ function run (callback) {
     options.port = process.env.PORT
 
     options.data = 'server/.hoodie'
-    options.public = 'server/public'
+    // options.public = 'server/public'
     options.dbAdapter = 'pouchdb-adapter-http'
     options.inMemory = false
     options.loglevel = 'warn'
@@ -46,13 +46,13 @@ function run (callback) {
       var server = new Hapi.Server(hapiOptions.server)
       server.connection(hapiOptions.connection)
 
-      // server.route({
-      //   method: "GET",
-      //   path: "/hello",
-      //   handler: function(request, h) {
-      //     return "hello world";
-      //   }
-      // });
+      server.route({
+        method: 'GET',
+        path: '/',
+        handler: function (request, handler) {
+          handler.response('TAG#SET server')
+        }
+      })
 
       server.register(
         {
