@@ -23,6 +23,13 @@ function run (callback) {
     options.address = undefined
     options.port = process.env.PORT
 
+    options.data = 'server/.hoodie'
+    options.public = 'server/public'
+    options.dbAdapter = 'pouchdb-adapter-http'
+    options.inMemory = false
+    options.loglevel = 'warn'
+    options.name = 'tagset-server'
+
     // console.log('OPTIONS', options);
     // console.log('ENV', process.env);
 
