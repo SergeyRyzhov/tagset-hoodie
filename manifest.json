@@ -11,6 +11,11 @@
   "theme_color": "#290716",
   "icons": [
     {
+      "src": "/tagset/static/icons/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
       "src": "/tagset/static/icons/android-chrome-36x36.png",
       "sizes": "36x36",
       "type": "image/png"
