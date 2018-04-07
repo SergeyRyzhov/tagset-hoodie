@@ -1,5 +1,6 @@
 export default {
   level: 2,
   allowGroupping: true,
-  hoodieUrl: 'http://localhost:8081'
+  serverUrl: 'https://tagset.herokuapp.com'
+  // serverUrl: 'http://localhost:8081'
 }

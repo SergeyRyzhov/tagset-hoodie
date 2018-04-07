@@ -26,7 +26,7 @@ const logger = Logger.getLogger('app')
 
 var hoodie = new Hoodie({
   PouchDB,
-  url: Config.hoodieUrl
+  url: Config.serverUrl
 })
 
 hoodie.connectionStatus.startChecking({
