@@ -8,10 +8,15 @@
 
     <!-- advanced -->
     <h1>Configure</h1>
+    Full details: <input type="checkbox" v-model="detailed"/>
+    <br/>
+    Goal count: <input type="number" min="1" step="1" v-model="goal"/>
+    <br/>
     <div v-for="topic in selectedTopics" :key="'s-topic-tags' + topic._id">
       <b-button variant="danger" size="sm" @click="toggleTopic(topic)">{{ topic.title }}</b-button>
       <div v-for=" {tag, include} in selectedTags[topic._id]" :key="'tag' + tag._id" style="display: inline;">
         <b-button variant="outline-success" size="sm" :pressed.sync="include" @click="toggleTag(topic, tag)">{{tag.title}}</b-button>
+        <span v-if="detailed">{{tag.rate}}</span>
       </div>
     </div>
 
@@ -38,6 +43,8 @@ export default {
       return {
         selectedTopics: {},
         selectedTags: {},
+        detailed: false,
+        goal: 28,
 
         combinedTags: ''
       }
@@ -56,26 +63,26 @@ export default {
           this.$delete(this.selectedTopics, topic._id)
         } else {
           this.$set(this.selectedTopics, topic._id, topic)
+          var goal = this.goal - Object.values(this.selectedTags).reduce((sum, states) => { sum += states.filter(state => state.include).length; return sum }, 0)
+          goal = Math.max(0, goal)
           this.$set(
             this.selectedTags,
             topic._id,
             this._tagsOfTopic(topic)
               .sort((a, b) => b.rate - a.rate)
               .reduce(function (result, tag) {
-                result[tag._id] = {
+                result.push({
                   tag,
-                  include: true
-                }
+                  include: goal-- > 0
+                })
                 return result
-              }, {})
+              }, [])
           )
         }
       },
       toggleTag (topic, tag) {
-        const {
-          include
-        } = this.selectedTags[topic._id][tag._id]
-        this.$set(this.selectedTags[topic._id][tag._id], 'include', !include)
+        var currentState = this.selectedTags[topic._id].find(state => state.tag._id === tag._id)
+        this.$set(currentState, 'include', !currentState.include)
       },
       combine () {
         let tags = []

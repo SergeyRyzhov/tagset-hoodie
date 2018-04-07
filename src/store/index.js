@@ -20,6 +20,6 @@ export default function (hoodie) {
       }
     },
     mutations: {},
-    strict: true
+    strict: false
   })
 }
