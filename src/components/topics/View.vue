@@ -2,9 +2,11 @@
   <div>
     <h1>Preview topic</h1>
 
-    <h2>{{ topic.title }}</h2>
-    <div v-for="tag in tags(topic)" :key="'tag' + tag._id" style="display: inline;">
-      #{{ tag.title }}
+    <div v-if="topic">
+      <h2>{{ topic.title }}</h2>
+      <div v-for="tag in tags(topic)" :key="'tag' + tag._id" style="display: inline;">
+        #{{ tag.title }} ({{ tag.rate }})
+      </div>
     </div>
   </div>
 </template>

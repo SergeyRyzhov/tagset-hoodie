@@ -4,7 +4,7 @@
     <h1>Tags</h1>
     <ul style="list-style-type: none;">
       <li v-for="tag in tags" :key="'tag' + tag._id">
-        {{ tag.title }}
+        {{ tag.title }} ({{ tag.rate }})
         <b-link :to="{ name: 'tag-view', params: { id: tag._id, tag }}">View</b-link>
         <b-link :to="{ name: 'tag-edit', params: { id: tag._id, tag }}">Edit</b-link>
       </li>
