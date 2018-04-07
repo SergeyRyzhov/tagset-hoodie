@@ -10,6 +10,8 @@ var parseOptions = require(hoodiePath + 'parse-options')
 
 var hoodie = require('hoodie/server').register
 
+var tagService = require('./services/tag.service.js')
+
 function run (callback) {
   compatibilityCheck(function (error) {
     if (error) {
@@ -52,7 +54,10 @@ function run (callback) {
         method: 'GET',
         path: '/api/statistic/{tagTitle}',
         handler: function (request, h) {
-          h.response(`TAG#SET server. API for ${encodeURIComponent(request.params.tagTitle)}!`)
+          var tagTitle = encodeURIComponent(request.params.tagTitle)
+          tagService.getStatistic(tagTitle).then(statistic => {
+            h.response(statistic)
+          })
         }
       })
 
