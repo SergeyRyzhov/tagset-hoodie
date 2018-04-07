@@ -24,13 +24,13 @@ function run (callback) {
     options.port = process.env.PORT
 
     options.data = 'server/.hoodie'
-    // options.public = 'server/public'
+    options.public = 'server/public'
     options.dbAdapter = 'pouchdb-adapter-http'
     options.inMemory = false
     options.loglevel = 'warn'
     options.name = 'tagset-server'
 
-    // console.log('OPTIONS', options);
+    // console.log('OPTIONS', options)
     // console.log('ENV', process.env);
 
     log.level = options.loglevel
@@ -43,14 +43,16 @@ function run (callback) {
       }
 
       var hapiOptions = getHapiOptions(options)
+      hapiOptions.connection.host = '0.0.0.0'
+
       var server = new Hapi.Server(hapiOptions.server)
       server.connection(hapiOptions.connection)
 
       server.route({
         method: 'GET',
-        path: '/',
-        handler: function (request, handler) {
-          handler.response('TAG#SET server')
+        path: '/api/statistic/{tagTitle}',
+        handler: function (request, h) {
+          h.response(`TAG#SET server. API for ${encodeURIComponent(request.params.tagTitle)}!`)
         }
       })
 
