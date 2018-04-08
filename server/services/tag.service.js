@@ -3,7 +3,8 @@ var fetch = require('node-fetch')
 
 function _getStatistic (title, callback) {
   // console.log('title:', title)
-  return fetch(process.env.STATISTICS_URL + encodeURIComponent(title))
+  // console.log('title:', encodeURIComponent(title))
+  return fetch(process.env.STATISTICS_URL + title)
     .then(function (res) {
       return res.text()
     }).then(function (body) {
