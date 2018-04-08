@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import BootstrapVue from 'bootstrap-vue'
 import VueHoodie from 'vue-hoodie'
 import Hoodie from '@hoodie/client'
-import PouchDB from 'pouchdb'
+import PouchDB from 'pouchdb-browser'
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 
 import './scss/theme.scss'
@@ -45,7 +45,7 @@ Vue.config.productionTip = false
 new Vue({
   store: StoreFactory(hoodie),
   hoodie,
-  created () {
+  mounted () {
     var service = AccountService(this.$hoodie)
     this.$hoodie.store.connect().then((object) => {
       service.validate(service.sharedUser).then(() => {

@@ -1,6 +1,8 @@
-export default {
+let config = {
   level: 2,
-  allowGroupping: true,
-  serverUrl: 'https://tagset.herokuapp.com'
+  allowGroupping: false,
   // serverUrl: 'http://localhost:8081'
+  serverUrl: 'https://tagset.herokuapp.com'
 }
+
+export default config

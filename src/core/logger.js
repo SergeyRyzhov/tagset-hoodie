@@ -35,7 +35,6 @@ function getLogger (name, level) {
   for (const method in mapping) {
     var options = mapping[method]
     if (options.enabled) {
-      // if (!options.lazy && !options.evaluate) {
       logger[method] = _buildAppender({
         buffer: this._buffer,
         method,
@@ -43,9 +42,6 @@ function getLogger (name, level) {
         evaluate: !!options.evaluate,
         lazy: !!options.lazy
       })
-      // }else{
-
-      // }
     } else logger[method] = () => {}
   }
 
