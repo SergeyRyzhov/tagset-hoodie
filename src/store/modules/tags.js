@@ -23,9 +23,8 @@ export default function (hoodie) {
         const result = rootState.links.all
           .filter(link => link.tag === tag._id)
           .reduce((topics, link) => {
-            topics.push(
-              rootState.topics.all.find(topic => topic._id === link.topic)
-            )
+            var topic = rootState.topics.all.find(topic => topic._id === link.topic)
+            topic && topics.push(topic)
             return topics
           }, [])
         logger.debug('topics of tag %o tag %o', result, tag)

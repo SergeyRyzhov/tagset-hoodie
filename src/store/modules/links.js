@@ -48,6 +48,7 @@ export default function (hoodie) {
             return promise
           })
         ).then(links => {
+          links = _Array.flatten(links)
           return hoodie.store.remove(links)
             .then(links => {
               if (links.length > 0) {
