@@ -91,7 +91,12 @@
       ...mapMutations({}),
       save (form) {
         logger.debug('form to save %o', form)
-        this.saveToDb(form).then(tag => logger.debug('new tag %o', tag))
+        this.saveToDb(form).then(tag => {
+          logger.debug('new tag %o', tag)
+          this.$router.push({
+            path: '/tags'
+          })
+        })
       },
       loadStatistic () {
         statisticApi.getStatistics(this.tag.title).then(statistic => {

@@ -20,45 +20,41 @@ const routes = [
   },
   {
     path: '/topics',
-    component: TopicList,
-    children: [
-      {
-        name: 'topic-view',
-        path: '/topic/:id/details',
-        component: ViewTopic
-      },
-      {
-        name: 'topic-edit',
-        path: '/topic/:id/edit',
-        component: EditTopic
-      },
-      {
-        name: 'topic-create',
-        path: '/topic/create',
-        component: CreateTopic
-      }
-    ]
+    component: TopicList
+  },
+  {
+    name: 'topic-view',
+    path: '/topic/:id/details',
+    component: ViewTopic
+  },
+  {
+    name: 'topic-edit',
+    path: '/topic/:id/edit',
+    component: EditTopic
+  },
+  {
+    name: 'topic-create',
+    path: '/topic/create',
+    component: CreateTopic
   },
   {
     path: '/tags',
-    component: TagList,
-    children: [
-      {
-        name: 'tag-view',
-        path: '/tag/:id/details',
-        component: ViewTag
-      },
-      {
-        name: 'tag-edit',
-        path: '/tag/:id/edit',
-        component: EditTag
-      },
-      {
-        name: 'tag-create',
-        path: '/tag/create',
-        component: CreateTag
-      }
-    ]
+    component: TagList
+  },
+  {
+    name: 'tag-view',
+    path: '/tag/:id/details',
+    component: ViewTag
+  },
+  {
+    name: 'tag-edit',
+    path: '/tag/:id/edit',
+    component: EditTag
+  },
+  {
+    name: 'tag-create',
+    path: '/tag/create',
+    component: CreateTag
   }
 ]
 

@@ -47,8 +47,12 @@
       ...mapMutations({}),
       save (form) {
         logger.debug(form)
-        this.saveToDb(form)
-        this.$set(this, 'form', defaultForm())
+        this.saveToDb(form).then(tag => {
+          this.$router.push({
+            name: 'tag-edit',
+            params: { id: tag._id, tag }
+          })
+        })
       }
     }
   }

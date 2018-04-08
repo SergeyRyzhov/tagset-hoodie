@@ -2,6 +2,7 @@
   <div>
     <!--tags-->
     <h1>Tags</h1>
+    <b-link :to="{ name: 'tag-create', params: { }}">Add new</b-link>
     <ul style="list-style-type: none;">
       <li v-for="tag in tags" :key="'tag' + tag._id">
         {{ tag.title }} ({{ tag.rate }})
@@ -9,9 +10,8 @@
         <b-link :to="{ name: 'tag-edit', params: { id: tag._id, tag }}">Edit</b-link>
       </li>
     </ul>
-    <b-link :to="{ name: 'tag-create', params: { }}">Add new</b-link>
 
-    <router-view></router-view>
+    <!-- <router-view></router-view> -->
   </div>
 </template>
 

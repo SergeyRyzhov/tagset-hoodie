@@ -2,6 +2,7 @@
   <div>
     <!--topics-->
     <h1>Topics</h1>
+    <b-link :to="{ name: 'topic-create', params: { }}">Add new</b-link>
     <ul style="list-style-type: none;">
       <li v-for="topic in topics" :key="'topic' + topic._id">
         {{ topic.title }}
@@ -9,9 +10,8 @@
         <b-link :to="{ name: 'topic-edit', params: { id: topic._id, topic }}">Edit</b-link>
       </li>
     </ul>
-    <b-link :to="{ name: 'topic-create', params: { }}">Add new</b-link>
 
-    <router-view></router-view>
+    <!-- <router-view></router-view> -->
   </div>
 </template>
 
