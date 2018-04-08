@@ -1,17 +1,17 @@
 CACHE MANIFEST
-#ver:2018-4-8 23:02:15
+#ver:2018-4-8 23:24:10
 #plugin:4.9.0
 
 CACHE:
-/tagset/static/js/vendor.169677e36e6dcab0fb09.js
-/tagset/static/js/app.0e8e58a12b782bb788a7.js
+/tagset/static/js/vendor.67a2154d7bbabf774dfb.js
+/tagset/static/js/app.58adf2007b27fef1040e.js
 /tagset/static/js/manifest.3dfca203b7872bc901fb.js
 /tagset/static/css/app.3519c876a75d656853578dded75a147c.css
 /tagset/manifest.json
 /tagset/
 /tagset/static/icons/logo.svg
-/tagset/static/icons/android-chrome-192x192.png
 /tagset/static/icons/android-chrome-144x144.png
+/tagset/static/icons/android-chrome-192x192.png
 /tagset/static/icons/android-chrome-256x256.png
 /tagset/static/icons/android-chrome-36x36.png
 /tagset/static/icons/android-chrome-48x48.png
