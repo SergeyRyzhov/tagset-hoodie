@@ -11,6 +11,7 @@
     Full details: <input type="checkbox" v-model="detailed"/>
     <br/>
     Goal count: <input type="number" min="1" step="1" v-model="goal"/>
+      <b-button variant="success" size="sm" @click="selectBest">Select best</b-button>
     <br/>
     <b-alert show :variant="improvements.grow? 'success':'warning'">Current set: {{ score.amount }} tags with average rate {{ score.average | float }} ({{ improvements.delta | float }})</b-alert>
     <div v-for="topic in selectedTopics" :key="'s-topic-tags' + topic._id">
@@ -25,7 +26,7 @@
     <h1>Results</h1>
     <div>
       <p>
-        <textarea v-model="combinedTags"></textarea>
+        <textarea v-model="combinedTags" rows="4" cols="35" style="min-width: 100%;"></textarea>
       </p>
       <b-button variant="primary" size="sm" @click="combine">Preview</b-button>
       <b-button variant="success" size="sm" @click="toBuffer">Copy to buffer</b-button>
@@ -35,6 +36,7 @@
 
 <script>
   import clipboard from 'clipboard-polyfill'
+import { _Array } from '../../core/sugar'
 import {
     mapState
   } from 'vuex'
@@ -104,23 +106,25 @@ export default {
           this.$set(this.selectedTags, tag._id, tag)
         }
       },
-      combine () {
-        let tags = []
-        for (const topicId in this.selectedTags) {
-          for (const tagId in this.selectedTags[topicId]) {
-            const {
-              tag,
-              include
-            } = this.selectedTags[topicId][tagId]
-            if (!include) continue
-            tags.push(tag)
-          }
-        }
-        let combinedTags = tags
+      selectBest () {
+        var allTags = Object.values(this.selectedTopics).reduce((tags, topic) => { tags.push(this.tagsOfTopic(topic)); return tags }, [])
+        allTags = _Array.flatten(allTags)
+        var best = allTags
           .filter(function uniq (value, index, self) {
             return self.indexOf(value) === index
           })
           .sort((a, b) => b.rate - a.rate)
+          .slice(0, this.goal)
+        Object.keys(this.selectedTags).forEach(tagId => {
+          this.$delete(this.selectedTags, tagId)
+        })
+        best.forEach(tag => {
+          this.$set(this.selectedTags, tag._id, tag)
+        })
+      },
+      combine () {
+        let tags = Object.values(this.selectedTags)
+        let combinedTags = tags
           .map(tag => '#' + tag.title)
           .join(' ')
         this.$set(this, 'combinedTags', combinedTags.trim())
