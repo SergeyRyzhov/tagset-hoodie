@@ -12,10 +12,11 @@
     <br/>
     Goal count: <input type="number" min="1" step="1" v-model="goal"/>
     <br/>
+    <b-alert show :variant="improvements.grow? 'success':'warning'">Current set: {{ score.amount }} tags with average rate {{ score.average | float }} ({{ improvements.delta | float }})</b-alert>
     <div v-for="topic in selectedTopics" :key="'s-topic-tags' + topic._id">
       <b-button variant="danger" size="sm" @click="toggleTopic(topic)">{{ topic.title }}</b-button>
-      <div v-for=" {tag, include} in selectedTags[topic._id]" :key="'tag' + tag._id" style="display: inline;">
-        <b-button variant="outline-success" size="sm" :pressed.sync="include" @click="toggleTag(topic, tag)">{{tag.title}}</b-button>
+      <div v-for=" tag in tagsOfTopic(topic)" :key="'tag' + tag._id" style="display: inline;">
+        <b-button variant="outline-success" size="sm" :pressed="selectedTags.hasOwnProperty(tag._id)" @click="toggleTag(tag, topic)">{{tag.title}}</b-button>
         <span v-if="detailed">{{tag.rate}}</span>
       </div>
     </div>
@@ -46,6 +47,10 @@ export default {
         detailed: false,
         goal: 28,
 
+        improvements: {
+          grow: false,
+          delta: 0
+        },
         combinedTags: ''
       }
     },
@@ -54,35 +59,50 @@ export default {
         topics: state => state.topics.all,
         tags: state => state.tags.all,
         links: state => state.links.all
-      })
+      }),
+      score () {
+        var selectedTags = Object.values(this.selectedTags)
+        var amount = selectedTags.length
+        var average = selectedTags.reduce((sum, tag) => { sum += tag.rate / amount; return sum }, 0)
+        return {
+          average,
+          amount
+        }
+      }
+    },
+    watch: {
+      score (newScore, oldScore) {
+        var delta = newScore.average - oldScore.average
+        this.$set(this.improvements, 'grow', delta > 0)
+        this.$set(this.improvements, 'delta', delta)
+      }
     },
     methods: {
       toggleTopic (topic) {
         if (this.selectedTopics.hasOwnProperty(topic._id)) {
-          this.$delete(this.selectedTags, topic._id)
+          this.tagsOfTopic(topic).forEach(tag => {
+            if (this.selectedTags.hasOwnProperty(tag._id)) {
+              this.$delete(this.selectedTags, tag._id)
+            }
+          })
           this.$delete(this.selectedTopics, topic._id)
         } else {
           this.$set(this.selectedTopics, topic._id, topic)
-          var goal = this.goal - Object.values(this.selectedTags).reduce((sum, states) => { sum += states.filter(state => state.include).length; return sum }, 0)
+          var goal = this.goal - Object.keys(this.selectedTags).length
           goal = Math.max(0, goal)
-          this.$set(
-            this.selectedTags,
-            topic._id,
-            this._tagsOfTopic(topic)
-              .sort((a, b) => b.rate - a.rate)
-              .reduce(function (result, tag) {
-                result.push({
-                  tag,
-                  include: goal-- > 0
-                })
-                return result
-              }, [])
-          )
+          this.tagsOfTopic(topic).forEach(tag => {
+            if (goal-- > 0) {
+              this.$set(this.selectedTags, tag._id, tag)
+            }
+          })
         }
       },
-      toggleTag (topic, tag) {
-        var currentState = this.selectedTags[topic._id].find(state => state.tag._id === tag._id)
-        this.$set(currentState, 'include', !currentState.include)
+      toggleTag (tag, topic) {
+        if (this.selectedTags.hasOwnProperty(tag._id)) {
+          this.$delete(this.selectedTags, tag._id)
+        } else {
+          this.$set(this.selectedTags, tag._id, tag)
+        }
       },
       combine () {
         let tags = []
@@ -108,14 +128,21 @@ export default {
       toBuffer () {
         clipboard.writeText(this.combinedTags)
       },
-      _tagsOfTopic (topic) {
+      tagsOfTopic (topic) {
         return this.links.filter(link => link.topic === topic._id).reduce(
           (tags, link) => {
             var item = this.tags.find(tag => tag._id === link.tag)
             item && tags.push(item)
             return tags
           }, []
-        )
+        ).sort((a, b) => b.rate - a.rate)
+      }
+    },
+    filters: {
+      float: function (value) {
+        if (!value) return '0'
+        value = Number(value)
+        return value.toFixed(2)
       }
     }
   }
