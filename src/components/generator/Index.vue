@@ -3,7 +3,7 @@
     <!-- topics -->
     <h1>Topics</h1>
     <div v-for="topic in topics" :key="'topic' + topic._id" style="display: inline;">
-      <b-button :variant="!selectedTopics.hasOwnProperty(topic._id)?'primary':'warning'" @click="toggleTopic(topic)">{{topic.title}}</b-button>
+      <b-button size="sm" :variant="!selectedTopics.hasOwnProperty(topic._id) ? 'primary' : 'warning'" @click="toggleTopic(topic)">{{topic.title}}</b-button>
     </div>
 
     <!-- advanced -->
@@ -13,7 +13,7 @@
     Goal count: <input type="number" min="1" step="1" v-model="goal"/>
       <b-button variant="success" size="sm" @click="selectBest">Select best</b-button>
     <br/>
-    <b-alert show :variant="improvements.grow? 'success':'warning'">Current set: {{ score.amount }} tags with average rate {{ score.average | float }} ({{ improvements.delta | float }})</b-alert>
+    <b-alert show :variant="improvements.alertType">Current set: {{ score.amount }} tags with average rate {{ score.average | float }} ({{ improvements.delta | float }})</b-alert>
     <div v-for="topic in selectedTopics" :key="'s-topic-tags' + topic._id">
       <b-button variant="danger" size="sm" @click="toggleTopic(topic)">{{ topic.title }}</b-button>
       <div v-for=" tag in tagsOfTopic(topic)" :key="'tag' + tag._id" style="display: inline;">
@@ -29,7 +29,7 @@
         <textarea v-model="combinedTags" rows="4" cols="35" style="min-width: 100%;"></textarea>
       </p>
       <b-button variant="primary" size="sm" @click="combine">Preview</b-button>
-      <b-button variant="success" size="sm" @click="toBuffer">Copy to buffer</b-button>
+      <b-button variant="success" size="sm" @click="toBuffer" :disabled="combinedTags.length == 0">Copy to buffer</b-button>
     </div>
   </div>
 </template>
@@ -50,6 +50,7 @@ export default {
         goal: 28,
 
         improvements: {
+          alertType: 'primary',
           grow: false,
           delta: 0
         },
@@ -76,6 +77,12 @@ export default {
       score (newScore, oldScore) {
         var delta = newScore.average - oldScore.average
         this.$set(this.improvements, 'grow', delta > 0)
+        this.$set(this.improvements, 'alertType',
+          Object.values(this.selectedTags).length > this.goal
+            ? 'danger'
+            : delta > 0
+              ? 'success'
+              : 'warning')
         this.$set(this.improvements, 'delta', delta)
       }
     },
