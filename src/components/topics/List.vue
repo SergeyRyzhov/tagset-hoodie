@@ -2,12 +2,12 @@
   <div>
     <!--topics-->
     <h1>Topics</h1>
-    <b-link :to="{ name: 'topic-create', params: { }}">Add new</b-link>
+    <b-button size="sm" :to="{ name: 'topic-create', params: { }}">Add new</b-button>
     <ul style="list-style-type: none;">
       <li v-for="topic in topics" :key="'topic' + topic._id">
         {{ topic.title }}
-        <b-link :to="{ name: 'topic-view', params: { id: topic._id, topic }}">View</b-link>
-        <b-link :to="{ name: 'topic-edit', params: { id: topic._id, topic }}">Edit</b-link>
+        <b-button size="sm" :to="{ name: 'topic-view', params: { id: topic._id, topic }}">View</b-button>
+        <b-button size="sm" :to="{ name: 'topic-edit', params: { id: topic._id, topic }}">Edit</b-button>
       </li>
     </ul>
 

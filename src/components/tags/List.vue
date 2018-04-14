@@ -2,14 +2,14 @@
   <div>
     <!--tags-->
     <h1>Tags</h1>
-    <b-link :to="{ name: 'tag-create', params: { }}">Add new</b-link>
+    <b-button size="sm" :to="{ name: 'tag-create', params: { }}">Add new</b-button>
     Hide good: <input type="checkbox" v-model="hideGood"/>
     <ul style="list-style-type: none;">
       <li v-for="tag in tags" :key="'tag' + tag._id">
         <div v-if="!(hideGood && tag.rate > 0)">
           {{ tag.title }} ({{ tag.rate }})
-          <b-link :to="{ name: 'tag-view', params: { id: tag._id, tag }}">View</b-link>
-          <b-link :to="{ name: 'tag-edit', params: { id: tag._id, tag }}">Edit</b-link>
+          <b-button size="sm" :to="{ name: 'tag-view', params: { id: tag._id, tag }}">View</b-button>
+          <b-button size="sm" :to="{ name: 'tag-edit', params: { id: tag._id, tag }}">Edit</b-button>
           <b-button variant="success" size="sm" @click="refreshStatistic(tag)">Update rate</b-button>
         </div>
       </li>
