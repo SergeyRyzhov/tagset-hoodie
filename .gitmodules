@@ -1,0 +1,4 @@
+[submodule "gh-pages"]
+	path = dist
+	url = https://github.com/SergeyRyzhov/tagset.git
+	branch = gh-pages
