@@ -1,37 +1,38 @@
 <template>
-  <div>
-    <!-- topics -->
-    <h1>Topics</h1>
-    <div v-for="topic in topics" :key="'topic' + topic._id" style="display: inline;">
-      <b-button size="sm" :variant="!selectedTopics.hasOwnProperty(topic._id) ? 'primary' : 'warning'" @click="toggleTopic(topic)">{{topic.title}}</b-button>
-    </div>
+  <b-container fluid>
+    <h1>Set generator</h1>
+    <b-form-group description="Select topics which describe your set">
+      <b-button v-for="topic in topics" :key="'topic' + topic._id" size="sm" :variant="!selectedTopics.hasOwnProperty(topic._id) ? 'primary' : 'warning'"
+        @click="toggleTopic(topic)">{{topic.title}}</b-button>
+    </b-form-group>
 
-    <!-- advanced -->
-    <h1>Configure</h1>
-    Full details: <input type="checkbox" v-model="detailed"/>
-    <br/>
-    Goal count: <input type="number" min="1" step="1" v-model="goal"/>
-      <b-button variant="success" size="sm" @click="selectBest">Select best</b-button>
-    <br/>
+    <b-form-group description="Configure quality of tags which you want to receive" label-for="goal">
+      <b-form-checkbox v-model="detailed">
+        Display tags rate
+      </b-form-checkbox>
+      <b-form-input v-model="goal" id="goal" type="number" placeholder="Enter your goal count"></b-form-input>
+      <b-button variant="success" right size="sm" @click="selectBest">Select best</b-button>
+    </b-form-group>
+
     <b-alert show :variant="improvements.alertType">Current set: {{ score.amount }} tags with average rate {{ score.average | float }} ({{ improvements.delta | float }})</b-alert>
-    <div v-for="topic in selectedTopics" :key="'s-topic-tags' + topic._id">
-      <b-button variant="danger" size="sm" @click="toggleTopic(topic)">{{ topic.title }}</b-button>
-      <div v-for=" tag in tagsOfTopic(topic)" :key="'tag' + tag._id" style="display: inline;">
-        <b-button variant="outline-success" size="sm" :pressed="selectedTags.hasOwnProperty(tag._id)" @click="toggleTag(tag, topic)">{{tag.title}}</b-button>
-        <span v-if="detailed">{{tag.rate}}</span>
-      </div>
-    </div>
 
-    <!-- result and copy to-->
-    <h1>Results</h1>
-    <div>
-      <p>
-        <textarea v-model="combinedTags" rows="4" cols="35" style="min-width: 100%;"></textarea>
-      </p>
+    <b-form-group description="Correct as you wish">
+      <div v-for="topic in selectedTopics" :key="'s-topic-tags' + topic._id">
+        <b-button variant="danger" size="sm" @click="toggleTopic(topic)">{{ topic.title }}</b-button>
+        <div v-for=" tag in tagsOfTopic(topic)" :key="'tag' + tag._id" style="display: inline;">
+          <b-button variant="outline-success" size="sm" :pressed="selectedTags.hasOwnProperty(tag._id)" @click="toggleTag(tag, topic)">{{tag.title}}</b-button>
+          <span v-if="detailed">{{tag.rate}}</span>
+        </div>
+      </div>
+    </b-form-group>
+
+    <b-form-group description="Review and take yout set">
+      <b-textarea v-model="combinedTags" placeholder="Your set will be here" readonly="readonly" :rows="4" :min-rows="1" :max-rows="7">
+      </b-textarea>
       <b-button variant="primary" size="sm" @click="combine">Preview</b-button>
       <b-button variant="success" size="sm" @click="toBuffer" :disabled="combinedTags.length == 0">Copy to buffer</b-button>
-    </div>
-  </div>
+    </b-form-group>
+  </b-container>
 </template>
 
 <script>
