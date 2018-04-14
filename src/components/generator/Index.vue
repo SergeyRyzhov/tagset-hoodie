@@ -1,16 +1,16 @@
 <template>
   <b-container fluid>
-    <h1>Set generator</h1>
+    <h1>Generator</h1>
     <b-form-group description="Select topics which describe your set">
       <b-button v-for="topic in topics" :key="'topic' + topic._id" size="sm" :variant="!selectedTopics.hasOwnProperty(topic._id) ? 'primary' : 'warning'"
         @click="toggleTopic(topic)">{{topic.title}}</b-button>
     </b-form-group>
 
-    <b-form-group description="Configure quality of tags which you want to receive" label-for="goal">
+    <b-form-group description="Configure quality of tags which you want to receive" >
       <b-form-checkbox v-model="detailed">
         Display tags rate
       </b-form-checkbox>
-      <b-form-input v-model="goal" id="goal" type="number" placeholder="Enter your goal count"></b-form-input>
+      <b-form-input v-model="goal" type="number" placeholder="Enter your goal count"></b-form-input>
       <b-button variant="success" right size="sm" @click="selectBest">Select best</b-button>
     </b-form-group>
 
