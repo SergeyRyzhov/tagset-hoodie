@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Generator from './components/generator/Index.vue'
+import SignIn from './components/auth/SignIn.vue'
 import {
   TopicList,
   CreateTopic,
@@ -14,47 +15,79 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/sign-in',
+    // alias: '/sign-in',
+    component: SignIn
+  },
+  {
     path: '/',
     alias: '/home',
-    component: Generator
+    component: Generator,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/topics',
-    component: TopicList
+    component: TopicList,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     name: 'topic-view',
     path: '/topic/:id/details',
-    component: ViewTopic
+    component: ViewTopic,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     name: 'topic-edit',
     path: '/topic/:id/edit',
-    component: EditTopic
+    component: EditTopic,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     name: 'topic-create',
     path: '/topic/create',
-    component: CreateTopic
+    component: CreateTopic,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/tags',
-    component: TagList
+    component: TagList,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     name: 'tag-view',
     path: '/tag/:id/details',
-    component: ViewTag
+    component: ViewTag,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     name: 'tag-edit',
     path: '/tag/:id/edit',
-    component: EditTag
+    component: EditTag,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     name: 'tag-create',
     path: '/tag/create',
-    component: CreateTag
+    component: CreateTag,
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 

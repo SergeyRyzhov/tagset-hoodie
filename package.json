@@ -20,6 +20,7 @@
     "axios": "^0.18.0",
     "bootstrap-vue": "^2.0.0-rc.2",
     "clipboard-polyfill": "^2.4.6",
+    "firebase": "^5.0.4",
     "hoodie": "^28.2.6",
     "jquery": "^1.9.1",
     "lodash": "^4.17.5",

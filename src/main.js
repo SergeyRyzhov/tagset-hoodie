@@ -6,6 +6,7 @@ import VueHoodie from 'vue-hoodie'
 import Hoodie from '@hoodie/client'
 import PouchDB from 'pouchdb-browser'
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
+import firebase from 'firebase'
 
 import './scss/theme.scss'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -23,6 +24,8 @@ Vue.use(BootstrapVue)
 Vue.use(VueHoodie)
 
 const logger = Logger.getLogger('app')
+
+firebase.initializeApp(Config.firebase)
 
 var hoodie = new Hoodie({
   PouchDB,
