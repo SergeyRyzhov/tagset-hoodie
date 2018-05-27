@@ -17,9 +17,11 @@
       </b-navbar-nav>
      <b-navbar-nav class="ml-auto">
         <b-nav-form v-if="!user">
-          <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Email address" v-model="email" />
-          <b-form-input size="sm" class="mr-sm-2" type="password" placeholder="Password" v-model="password" />
-          <b-button size="sm" class="my-2 my-sm-0" @click="signIn">Sign in</b-button>
+          <b-form-group>
+            <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Email address" v-model="email" />
+            <b-form-input size="sm" class="mr-sm-2" type="password" placeholder="Password" v-model="password" />
+            <b-button size="sm" class="my-2 my-sm-0" @click="signIn">Sign in</b-button>
+          </b-form-group>
         </b-nav-form>
         <!--<b-nav-item-dropdown text="Lang" right>
           <b-dropdown-item href="#">EN</b-dropdown-item>
