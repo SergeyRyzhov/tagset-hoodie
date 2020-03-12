@@ -1,24 +1,24 @@
 CACHE MANIFEST
-#ver:2018-5-27 11:13:15
-#plugin:4.9.0
+#ver:3/12/2020, 9:15:44 PM
+#plugin:4.9.1
 
 CACHE:
-/tagset/static/js/vendor.5c92f84f65f90122d26e.js
-/tagset/static/js/app.b04bd85ae0df053c79ac.js
+/tagset/static/js/vendor.61a09a276334977715c5.js
+/tagset/static/js/app.c366d1b858fb281904c3.js
 /tagset/static/js/manifest.3dfca203b7872bc901fb.js
-/tagset/static/css/app.cd10cde6d6231a425ee7ee199cfc31b1.css
+/tagset/static/css/app.c5d311fd8e15e188c2d530a7f0642fa6.css
 /tagset/manifest.json
 /tagset/
 /tagset/static/icons/logo.svg
+/tagset/static/icons/android-chrome-36x36.png
+/tagset/static/icons/android-chrome-48x48.png
 /tagset/static/icons/android-chrome-144x144.png
 /tagset/static/icons/android-chrome-192x192.png
-/tagset/static/icons/android-chrome-256x256.png
-/tagset/static/icons/android-chrome-36x36.png
-/tagset/static/icons/android-chrome-384x384.png
-/tagset/static/icons/android-chrome-48x48.png
 /tagset/static/icons/android-chrome-72x72.png
-/tagset/static/icons/android-chrome-512x512.png
+/tagset/static/icons/android-chrome-256x256.png
 /tagset/static/icons/android-chrome-96x96.png
+/tagset/static/icons/android-chrome-384x384.png
+/tagset/static/icons/android-chrome-512x512.png
 
 NETWORK:
 *
