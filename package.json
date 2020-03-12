@@ -1,20 +1,20 @@
 {
   "name": "tagset",
   "version": "0.1.0",
+  "private": true,
   "description": "Site for selecting your own set of tags",
   "author": "Sergey Ryzhov <serega.rf@gmail.com>",
-  "private": true,
   "scripts": {
-    "dev": "node build/dev-server.js",
-    "start": "node server/index.js",
     "build": "node build/build.js",
-    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
+    "dev": "node build/dev-server.js",
+    "e2e": "node test/e2e/runner.js",
     "lint:fix": "eslint --fix --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "unit:watch": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
-    "start-hoodie": "hoodie"
+    "start": "node server/index.js",
+    "start-hoodie": "hoodie",
+    "test": "npm run unit && npm run e2e",
+    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
+    "unit:watch": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -34,9 +34,9 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.0-beta.6",
+    "@vue/cli-plugin-babel": "^4.2.3",
     "@vue/cli-plugin-eslint": "^3.0.0-beta.6",
-    "@vue/cli-service": "^3.0.0-beta.6",
+    "@vue/cli-service": "~4.2.3",
     "autoprefixer": "^7.1.5",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
@@ -114,13 +114,13 @@
     "webpack-hot-middleware": "^2.19.1",
     "webpack-merge": "^4.1.0"
   },
-  "engines": {
-    "node": ">= 4.0.0",
-    "npm": ">= 3.0.0"
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
+  }
 }
