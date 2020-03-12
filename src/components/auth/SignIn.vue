@@ -17,26 +17,26 @@
 </template>
 
 <script>
-  import firebase from 'firebase'
-  export default {
-    data () {
-      return {
-        email: '',
-        password: '',
+import firebase from 'firebase'
+export default {
+  data () {
+    return {
+      email: '',
+      password: '',
 
-        signUpForm: {
-          email: '',
-          password: ''
-        }
+      signUpForm: {
+        email: '',
+        password: ''
       }
-    },
-    mounted () {
-      const user = firebase.auth().currentUser
-      if (user) {
-        this.$router.replace('/')
-      }
-    },
-    methods:
+    }
+  },
+  mounted () {
+    const user = firebase.auth().currentUser
+    if (user) {
+      this.$router.replace('/')
+    }
+  },
+  methods:
       {
         signUp: function () {
           firebase.auth()
@@ -52,7 +52,7 @@
               error => { alert(error.message) })
         }
       }
-  }
+}
 </script>
 
 <style scoped>

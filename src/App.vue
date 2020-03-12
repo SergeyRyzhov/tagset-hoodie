@@ -1,37 +1,37 @@
 <template>
   <div id="app">
-    <Navigator></Navigator>
-    <router-view></router-view>
+    <Navigator />
+    <router-view />
   </div>
 </template>
 
 <script>
-  import Navigator from './components/Navigator.vue'
-  import router from './router'
-  import firebase from 'firebase'
-  
-  router.beforeEach((to, from, next) => {
-    if (!to) {
-      next()
-      return
-    }
+import Navigator from './components/Navigator.vue'
+import router from './router'
+import firebase from 'firebase'
 
-    const currentUser = firebase.auth().currentUser
-    const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-    if (requiresAuth && !currentUser) {
-      next('/sign-in')
-    } else {
-      next()
-    }
-  })
-
-  export default {
-    name: 'app',
-    components: {
-      Navigator
-    },
-    router
+router.beforeEach((to, from, next) => {
+  if (!to) {
+    next()
+    return
   }
+
+  const currentUser = firebase.auth().currentUser
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  if (requiresAuth && !currentUser) {
+    next('/sign-in')
+  } else {
+    next()
+  }
+})
+
+export default {
+  name: 'App',
+  components: {
+    Navigator
+  },
+  router
+}
 </script>
 
 <style scoped>

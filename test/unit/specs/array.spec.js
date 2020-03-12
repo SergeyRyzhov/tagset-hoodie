@@ -1,4 +1,3 @@
-/* global  describe, it, expect,beforeEach */
 import { _Array } from '../../src/core/sugar'
 
 describe('sugar.Array', function () {
