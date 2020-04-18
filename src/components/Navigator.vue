@@ -24,11 +24,8 @@
         <b-nav-item :to="{ path: '/tags' }">
           Tags
         </b-nav-item>
-        <b-nav-item :to="{ path: '/history' }">
-          History
-        </b-nav-item>
-        <b-nav-item :to="{ path: '/statistic' }">
-          Statistic
+        <b-nav-item :to="{ path: '/viewer' }">
+          Viewer
         </b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">

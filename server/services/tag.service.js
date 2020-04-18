@@ -1,5 +1,6 @@
 
 var fetch = require('node-fetch')
+var ig = require('instagram-scraping')
 
 function _getStatistic (title, callback) {
   // console.log('title:', title)
@@ -27,6 +28,17 @@ function _getStatistic (title, callback) {
     })
 }
 
+function _scrapePostCode (code) { return ig.scrapePostCode(code) }
+function _scrapePostData (post) { return ig.scrapePostData(post) }
+function _scrapeTag (tag) { return ig.scrapeTag(tag) }
+function _deepScrapeTagPage (tag) { return ig.deepScrapeTagPage(tag) }
+function _scrapeUserPage (username) { return ig.scrapeUserPage(username) }
+
 module.exports = {
-  getStatistic: _getStatistic
+  getStatistic: _getStatistic,
+  scrapePostCode: _scrapePostCode,
+  scrapePostData: _scrapePostData,
+  scrapeTag: _scrapeTag,
+  deepScrapeTagPage: _deepScrapeTagPage,
+  scrapeUserPage: _scrapeUserPage
 }
