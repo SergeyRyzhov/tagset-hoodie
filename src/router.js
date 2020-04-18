@@ -10,6 +10,7 @@ import {
   ViewTopic
 } from './components/topics'
 import { TagList, CreateTag, EditTag, ViewTag } from './components/tags'
+import { ViewPost } from './components/viewer'
 
 Vue.use(VueRouter)
 
@@ -85,6 +86,13 @@ const routes = [
     name: 'tag-create',
     path: '/tag/create',
     component: CreateTag,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/viewer',
+    component: ViewPost,
     meta: {
       requiresAuth: true
     }

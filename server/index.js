@@ -61,6 +61,61 @@ function run (callback) {
         }
       })
 
+      server.route({
+        method: 'GET',
+        path: '/api/scraping/postCode/{code}',
+        handler: function (request, h) {
+          var code = encodeURIComponent(request.params.code)
+          tagService.scrapePostCode(code).then(statistic => {
+            h.response(statistic)
+          })
+        }
+      })
+
+      server.route({
+        method: 'GET',
+        path: '/api/scraping/postData/{post}',
+        handler: function (request, h) {
+          var post = encodeURIComponent(request.params.post)
+          tagService.scrapePostData(post).then(statistic => {
+            h.response(statistic)
+          })
+        }
+      })
+
+      server.route({
+        method: 'GET',
+        path: '/api/scraping/tag/{tag}',
+        handler: function (request, h) {
+          var tag = encodeURIComponent(request.params.tag)
+          tagService.scrapeTag(tag).then(statistic => {
+            h.response(statistic)
+          })
+        }
+      })
+
+      server.route({
+        method: 'GET',
+        path: '/api/scraping/tagPage/{tag}',
+        handler: function (request, h) {
+          var tag = encodeURIComponent(request.params.tag)
+          tagService.deepScrapeTagPage(tag).then(statistic => {
+            h.response(statistic)
+          })
+        }
+      })
+
+      server.route({
+        method: 'GET',
+        path: '/api/scraping/userPage/{usename}',
+        handler: function (request, h) {
+          var usename = encodeURIComponent(request.params.usename)
+          tagService.scrapeUserPage(usename).then(statistic => {
+            h.response(statistic)
+          })
+        }
+      })
+
       server.register(
         {
           register: hoodie,
