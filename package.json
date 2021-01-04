@@ -17,7 +17,7 @@
     "unit:watch": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap-vue": "^2.6.1",
     "clipboard-polyfill": "^2.8.6",
     "firebase": "^7.10.0",
